@@ -1,16 +1,27 @@
-import React from 'react'
+import React from 'react';
 
-class AddPlan extends React.Component {
+class AddItem extends React.Component {
     state = {
-        plan: ''
+        plan: '',
+        done: false
     }
+
     onHandleChange = (e) => {
-        this.setState({ plan: e.target.value })
+        this.setState({ plan: e.target.value });
     }
+
+    onHandleAdd = () => {
+        const newItem = this.state;
+        this.props.addNewItem(newItem);
+    }
+
     render() {
         const { plan } = this.state;
         return (
-            <input value={plan} onChange={this.onHandleChange} />
+            <React.Fragment>
+                <button onClick={this.onHandleAdd}>Add</button>
+                <input value={plan} onChange={this.onHandleChange} />
+            </React.Fragment>
         )
     }
 }
