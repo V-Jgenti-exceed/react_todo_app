@@ -12,7 +12,7 @@ class AddItem extends React.Component {
 
     onHandleAdd = () => {
         const newItem = this.state;
-        this.props.addNewItem(newItem);
+        this.props.createItem(newItem);
     }
 
     render() {
