@@ -6,7 +6,6 @@ import { AddItem } from '../src/components/AddItem';
 class App extends React.Component {
   state = {
     arrayItems: [],
-
   }
 
   createItem = (item) => {
