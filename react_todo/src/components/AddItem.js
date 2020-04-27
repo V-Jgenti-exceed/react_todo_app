@@ -3,7 +3,8 @@ import React from 'react';
 class AddItem extends React.Component {
     state = {
         plan: '',
-        done: false
+        done: false,
+        id: ''
     }
 
     onHandleChange = (e) => {
@@ -12,7 +13,9 @@ class AddItem extends React.Component {
 
     onHandleAdd = () => {
         const newItem = this.state;
+        newItem.id = +new Date();
         this.props.createItem(newItem);
+        this.setState({ plan: '', done: false, id: '' });
     }
 
     render() {
