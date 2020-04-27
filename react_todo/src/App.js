@@ -27,7 +27,6 @@ class App extends React.Component {
       <React.Fragment>
         <AddItem createItem={this.createItem} />
         <Itemslist items={this.state.arrayItems} deleteItem={this.deleteItem} />
-
       </React.Fragment>
     )
   }
