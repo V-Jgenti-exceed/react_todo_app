@@ -5,7 +5,7 @@ class Itemslist extends React.Component {
 
     render() {
         const delItem = this.props.deleteItem;
-        const planDraw = this.props.items.map( (object, index) => {
+        const planDraw = this.props.items.map((object, index) => {
             return <Item key={index} plan={object.plan} dell={delItem} id={object.id} />;
         });
 
