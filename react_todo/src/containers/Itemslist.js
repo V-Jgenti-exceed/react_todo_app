@@ -8,7 +8,6 @@ class Itemslist extends React.Component {
         const planDraw = this.props.items.map((object, index) => {
             return <Item key={index} plan={object.plan} dell={delItem} id={object.id} />;
         });
-
         return (
             <React.Fragment>
                 {planDraw}

@@ -15,11 +15,11 @@ class App extends React.Component {
   }
 
   deleteItem = (id) => {
-    const forDelete = this.state.arrayItems;
-    const ok = forDelete.filter((chtota) => {
-      return chtota.id !== id;
+    const stateArr = this.state.arrayItems;
+    const dellArr = stateArr.filter((item) => {
+      return item.id !== id;
     })
-    this.setState({ arrayItems: ok });
+    this.setState({ arrayItems: dellArr });
   }
 
   render() {
