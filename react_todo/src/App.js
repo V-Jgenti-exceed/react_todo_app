@@ -6,7 +6,7 @@ import { AddItem } from '../src/components/AddItem';
 class App extends React.Component {
   state = {
     arrayItems: [],
-    
+
   }
 
   createItem = (item) => {
@@ -15,12 +15,10 @@ class App extends React.Component {
   }
 
   deleteItem = (id) => {
-    console.log("@@ID",id);
     const forDelete = this.state.arrayItems;
     const ok = forDelete.filter((chtota) => {
       return chtota.id !== id;
     })
-console.log("@@@Ok",ok)
     this.setState({ arrayItems: ok });
   }
 

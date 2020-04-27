@@ -14,13 +14,11 @@ class AddItem extends React.Component {
     onHandleAdd = () => {
         const newItem = this.state;
         newItem.id = +new Date();
-        console.log("@@@NewitemId",newItem);
         this.props.createItem(newItem);
-        this.setState({ plan:'',done:false,id:''});
+        this.setState({ plan: '', done: false, id: '' });
     }
 
     render() {
-        console.log("@@Rednder");
         const { plan } = this.state;
         return (
             <React.Fragment>
