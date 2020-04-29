@@ -6,7 +6,6 @@ import { AddItem } from '../src/components/AddItem';
 class App extends React.Component {
   state = {
     arrayItems: [],
-
   }
 
   createItem = (item) => {
@@ -22,11 +21,21 @@ class App extends React.Component {
     this.setState({ arrayItems: dellArr });
   }
 
+  checkPlan = (id, par) => {
+    const mainArr = this.state.arrayItems;
+    for (let i of mainArr) {
+      if (i.id === id) {
+        i.done = par;
+      }
+    }
+    this.setState({ arrayItems: mainArr });
+  }
+
   render() {
     return (
       <React.Fragment>
         <AddItem createItem={this.createItem} />
-        <Itemslist items={this.state.arrayItems} deleteItem={this.deleteItem} />
+        <Itemslist items={this.state.arrayItems} deleteItem={this.deleteItem} checkPlan={this.checkPlan} />
       </React.Fragment>
     )
   }
@@ -36,4 +45,5 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 )
+
 export default App;
