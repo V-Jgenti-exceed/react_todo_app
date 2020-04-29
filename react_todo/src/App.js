@@ -6,7 +6,6 @@ import { AddItem } from '../src/components/AddItem';
 class App extends React.Component {
   state = {
     arrayItems: [],
-
   }
 
   createItem = (item) => {
@@ -26,10 +25,10 @@ class App extends React.Component {
     const mainArr = this.state.arrayItems;
     for (let i of mainArr) {
       if (i.id === id) {
-        i.done = par
+        i.done = par;
       }
     }
-    this.setState({ arrayItems: mainArr })
+    this.setState({ arrayItems: mainArr });
   }
 
   render() {
