@@ -13,6 +13,7 @@ class App extends React.Component {
     this.setState({ arrayItems: [item, ...array] });
   }
 
+  //delete plan
   deleteItem = (id) => {
     const stateArr = this.state.arrayItems;
     const dellArr = stateArr.filter((item) => {
@@ -21,6 +22,7 @@ class App extends React.Component {
     this.setState({ arrayItems: dellArr });
   }
 
+  //done undone
   checkPlan = (id, par) => {
     const mainArr = this.state.arrayItems;
     for (let i of mainArr) {
