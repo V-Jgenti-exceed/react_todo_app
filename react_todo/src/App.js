@@ -7,7 +7,7 @@ class App extends React.Component {
   state = {
     arrayItems: [],
   }
-
+  //add plan
   createItem = (item) => {
     const array = [...this.state.arrayItems];
     this.setState({ arrayItems: [item, ...array] });
@@ -33,11 +33,27 @@ class App extends React.Component {
     this.setState({ arrayItems: mainArr });
   }
 
+  //save changed plan
+  changePlan = (id, val) => {
+    const array = this.state.arrayItems;
+    for (let i of array) {
+      if (i.id === id) {
+        i.plan = val
+      }
+    }
+    this.setState({ arrayItems: array });
+  }
+
   render() {
     return (
       <React.Fragment>
         <AddItem createItem={this.createItem} />
-        <Itemslist items={this.state.arrayItems} deleteItem={this.deleteItem} checkPlan={this.checkPlan} />
+        <Itemslist
+          items={this.state.arrayItems}
+          deleteItem={this.deleteItem}
+          checkPlan={this.checkPlan}
+          changePlan={this.changePlan}
+        />
       </React.Fragment>
     )
   }
