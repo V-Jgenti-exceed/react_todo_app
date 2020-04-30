@@ -7,6 +7,7 @@ class App extends React.Component {
   state = {
     arrayItems: [],
   }
+  
   //add plan
   createItem = (item) => {
     const array = [...this.state.arrayItems];

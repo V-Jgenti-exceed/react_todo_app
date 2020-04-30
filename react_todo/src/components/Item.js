@@ -4,8 +4,7 @@ class Item extends React.Component {
     state = {
         editMode: false,
         value: '',
-        itm: this.props.items
-
+        itm: this.props.items,
     }
 
     deleteFromArr = () => {
@@ -26,7 +25,7 @@ class Item extends React.Component {
 
     onBlurHandler = () => {
         this.setState({ editMode: false });
-        this.props.changePlan(this.props.id, this.state.value)
+        this.props.changePlan(this.props.id, this.state.value);
     }
 
     saveByEnter = (e) => {
@@ -36,7 +35,6 @@ class Item extends React.Component {
     }
 
     render() {
-
         let className = this.props.check ? 'txt' : '';
         let showHide = this.state.editMode ? 'trumode' : 'folsemode';
         return (
