@@ -7,7 +7,7 @@ class App extends React.Component {
   state = {
     arrayItems: [],
   }
-  
+
   //add plan
   createItem = (item) => {
     const array = [...this.state.arrayItems];
@@ -39,7 +39,7 @@ class App extends React.Component {
     const array = this.state.arrayItems;
     for (let i of array) {
       if (i.id === id) {
-        i.plan = val
+        i.plan = val;
       }
     }
     this.setState({ arrayItems: array });
