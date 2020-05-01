@@ -24,3 +24,7 @@ code {
 .folsemode {
   display: none;
 }
+
+.bottom_menu {
+  display:inline;
+}

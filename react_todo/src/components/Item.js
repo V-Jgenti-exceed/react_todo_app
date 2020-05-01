@@ -4,7 +4,6 @@ class Item extends React.Component {
     state = {
         editMode: false,
         value: '',
-        itm: this.props.items,
     }
 
     deleteFromArr = () => {
@@ -24,13 +23,16 @@ class Item extends React.Component {
     }
 
     onBlurHandler = () => {
-        this.setState({ editMode: false });
-        this.props.changePlan(this.props.id, this.state.value);
+        if (this.state.editMode === true) {
+            this.setState({ editMode: false });
+            this.props.changePlan(this.props.id, this.state.value);
+        }
     }
 
     saveByEnter = (e) => {
         if (e.key === 'Enter') {
             this.setState({ editMode: false });
+            this.props.changePlan(this.props.id, this.state.value);
         }
     }
 
@@ -48,8 +50,8 @@ class Item extends React.Component {
                 />
                 <input
                     type='checkbox'
-                    value={this.props.check}
-                    onChange={e => this.checkedItem(e)}
+                    checked={this.props.check}
+                    onChange={this.checkedItem}
                 />
                 <p
                     className={className}
