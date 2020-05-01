@@ -12,6 +12,7 @@ class Filter extends React.Component {
                 <button onClick={this.filter} value='All'>All</button>
                 <button onClick={this.filter} value='Active'>Active</button>
                 <button onClick={this.filter} value='Done'>Done</button>
+                <button>Clear completed</button>
             </div>
         )
     }
