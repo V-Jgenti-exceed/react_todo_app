@@ -2,7 +2,9 @@ import React from 'react';
 
 class Item extends React.Component {
     state = {
-        checkStatus: this.props.check,
+        editMode: false,
+        value: '',
+        itm: this.props.items,
     }
 
     deleteFromArr = () => {
@@ -10,17 +12,53 @@ class Item extends React.Component {
     }
 
     checkedItem = (e) => {
-        this.setState({ checkStatus: e.target.checked });
         this.props.checkPlan(this.props.id, e.target.checked);
     }
 
+    editPlan = () => {
+        this.setState({ editMode: true, value: this.props.plan });
+    }
+
+    inputChange = (e) => {
+        this.setState({ value: e.target.value });
+    }
+
+    onBlurHandler = () => {
+        this.setState({ editMode: false });
+        this.props.changePlan(this.props.id, this.state.value);
+    }
+
+    saveByEnter = (e) => {
+        if (e.key === 'Enter') {
+            this.setState({ editMode: false });
+        }
+    }
+
     render() {
-        let className = this.state.checkStatus ? 'txt' : '';
+        let className = this.props.check ? 'txt' : '';
+        let showHide = this.state.editMode ? 'trumode' : 'folsemode';
         return (
-            <div className='marking'>
-                <input type='checkbox' value={this.props.check} onChange={e => this.checkedItem(e)} />
-                <p className={className}>{this.props.plan}</p>
-                <button onClick={this.deleteFromArr}>-</button>
+            <div className='marking' onBlur={this.onBlurHandler}>
+                <input
+                    type='text'
+                    className={showHide}
+                    value={this.state.value}
+                    onChange={this.inputChange}
+                    onKeyDown={this.saveByEnter}
+                />
+                <input
+                    type='checkbox'
+                    value={this.props.check}
+                    onChange={e => this.checkedItem(e)}
+                />
+                <p
+                    className={className}
+                    onDoubleClick={this.editPlan}
+                >
+                    {this.props.plan}
+                </p>
+                <button
+                    onClick={this.deleteFromArr}>-</button>
             </div>
         )
     }

@@ -8,11 +8,13 @@ class App extends React.Component {
     arrayItems: [],
   }
 
+  //add plan
   createItem = (item) => {
     const array = [...this.state.arrayItems];
     this.setState({ arrayItems: [item, ...array] });
   }
 
+  //delete plan
   deleteItem = (id) => {
     const stateArr = this.state.arrayItems;
     const dellArr = stateArr.filter((item) => {
@@ -21,6 +23,7 @@ class App extends React.Component {
     this.setState({ arrayItems: dellArr });
   }
 
+  //done undone
   checkPlan = (id, par) => {
     const mainArr = this.state.arrayItems;
     for (let i of mainArr) {
@@ -31,11 +34,27 @@ class App extends React.Component {
     this.setState({ arrayItems: mainArr });
   }
 
+  //save changed plan
+  changePlan = (id, val) => {
+    const array = this.state.arrayItems;
+    for (let i of array) {
+      if (i.id === id) {
+        i.plan = val;
+      }
+    }
+    this.setState({ arrayItems: array });
+  }
+
   render() {
     return (
       <React.Fragment>
         <AddItem createItem={this.createItem} />
-        <Itemslist items={this.state.arrayItems} deleteItem={this.deleteItem} checkPlan={this.checkPlan} />
+        <Itemslist
+          items={this.state.arrayItems}
+          deleteItem={this.deleteItem}
+          checkPlan={this.checkPlan}
+          changePlan={this.changePlan}
+        />
       </React.Fragment>
     )
   }

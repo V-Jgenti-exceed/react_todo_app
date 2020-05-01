@@ -14,5 +14,13 @@ code {
 
 .txt {
   text-decoration: line-through;
-  color: red;
+  color: grey;
+}
+
+.trumode {
+  display: block;
+}
+
+.folsemode {
+  display: none;
 }

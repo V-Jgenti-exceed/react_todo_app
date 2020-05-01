@@ -4,7 +4,7 @@ class AddItem extends React.Component {
     state = {
         plan: '',
         done: false,
-        id: ''
+        id: '',
     }
 
     onHandleChange = (e) => {
