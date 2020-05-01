@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Itemslist } from '../src/containers/Itemslist';
 import { AddItem } from '../src/components/AddItem';
+import { Filter } from './components/Filter';
 
 class App extends React.Component {
   state = {
     arrayItems: [],
+    filterState: '',
   }
 
   //add plan
@@ -48,12 +50,15 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <AddItem createItem={this.createItem} />
+        <AddItem
+          createItem={this.createItem}
+        />
         <Itemslist
           items={this.state.arrayItems}
           deleteItem={this.deleteItem}
           checkPlan={this.checkPlan}
           changePlan={this.changePlan}
+          filterArray={this.filterArray}
         />
       </React.Fragment>
     )
