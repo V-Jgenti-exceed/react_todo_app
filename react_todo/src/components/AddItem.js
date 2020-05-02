@@ -11,19 +11,20 @@ class AddItem extends React.Component {
         this.setState({ plan: e.target.value });
     }
 
-    onHandleAdd = () => {
-        const newItem = this.state;
-        newItem.id = +new Date();
-        this.props.createItem(newItem);
-        this.setState({ plan: '', done: false, id: '' });
+    addByEnter = (e) => {
+        if (e.key === 'Enter') {
+            const newItem = this.state;
+            newItem.id = +new Date();
+            this.props.createItem(newItem);
+            this.setState({ plan: '', done: false, id: '' });
+        }
     }
 
     render() {
         const { plan } = this.state;
         return (
             <React.Fragment>
-                <button onClick={this.onHandleAdd}>Add</button>
-                <input value={plan} onChange={this.onHandleChange} />
+                <input value={plan} onChange={this.onHandleChange} onKeyPress={this.addByEnter} />
             </React.Fragment>
         )
     }

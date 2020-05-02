@@ -12,34 +12,36 @@ class Itemslist extends React.Component {
     }
 
     render() {
-        let someArr = [];
-
-        if (this.state.filterState === 'All') {
-            someArr = this.props.items;
-        } else if (this.state.filterState === 'Active') {
-            someArr = this.props.items.filter(item => item.done === false)
-        } else if (this.state.filterState === 'Done') {
-            someArr = this.props.items.filter(item => item.done === true);
-        }
-
-        const delItem = this.props.deleteItem;
-        const checkPlan = this.props.checkPlan;
-        const changePlan = this.props.changePlan;
-        const planDraw = someArr.map((object, index) => {
-            return <Item key={index}
+        let count = 0;
+        const button = this.state.filterState;
+        const planDraw = this.props.items.map((object, index) => {
+            const item = <Item key={index}
                 plan={object.plan}
-                dell={delItem}
+                dell={this.props.deleteItem}
                 id={object.id}
                 check={object.done}
-                checkPlan={checkPlan}
-                changePlan={changePlan}
-
+                updateObject={this.props.updateObject}
             />;
+            if (button === 'All') {
+                count++;
+                return item;
+            } else if (button === 'Active' && !object.done) {
+                count++;
+                return item;
+            } else if (button === 'Done' && object.done) {
+                count++;
+                return item;
+            }
         });
+
         return (
             <React.Fragment>
                 {planDraw}
-                <Filter changefilterState={this.changefilterState} />
+                <Filter
+                    changefilterState={this.changefilterState}
+                    clearCompleted={this.props.clearCompleted}
+                    lenghtOfArr={count}
+                />
             </React.Fragment>
         )
     }
