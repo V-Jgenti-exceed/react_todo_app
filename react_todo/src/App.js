@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Itemslist } from '../src/containers/Itemslist';
 import { AddItem } from '../src/components/AddItem';
-import { Filter } from './components/Filter';
 
 class App extends React.Component {
   state = {
@@ -26,25 +25,20 @@ class App extends React.Component {
   }
 
   //done undone
-  checkPlan = (id, par) => {
+  updateObject = (id, val, par) => {
     const mainArr = this.state.arrayItems;
     for (let i of mainArr) {
       if (i.id === id) {
-        i.done = par;
+        i[par] = val;
       }
     }
     this.setState({ arrayItems: mainArr });
   }
 
-  //save changed plan
-  changePlan = (id, val) => {
-    const array = this.state.arrayItems;
-    for (let i of array) {
-      if (i.id === id) {
-        i.plan = val;
-      }
-    }
-    this.setState({ arrayItems: array });
+  clearCompleted = () => {
+    const mainArr = this.state.arrayItems;
+    const filtredArr = mainArr.filter(item => !item.done);
+    this.setState({ arrayItems: filtredArr });
   }
 
   render() {
@@ -56,9 +50,9 @@ class App extends React.Component {
         <Itemslist
           items={this.state.arrayItems}
           deleteItem={this.deleteItem}
-          checkPlan={this.checkPlan}
-          changePlan={this.changePlan}
+          updateObject={this.updateObject}
           filterArray={this.filterArray}
+          clearCompleted={this.clearCompleted}
         />
       </React.Fragment>
     )

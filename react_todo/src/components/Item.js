@@ -11,7 +11,7 @@ class Item extends React.Component {
     }
 
     checkedItem = (e) => {
-        this.props.checkPlan(this.props.id, e.target.checked);
+        this.props.updateObject(this.props.id, e.target.checked, 'done');
     }
 
     editPlan = () => {
@@ -22,17 +22,18 @@ class Item extends React.Component {
         this.setState({ value: e.target.value });
     }
 
+    changeState = (prop, value) => {
+        this.setState({ editMode: false });
+        this.props.updateObject(prop, value, 'plan');
+    }
+
     onBlurHandler = () => {
-        if (this.state.editMode === true) {
-            this.setState({ editMode: false });
-            this.props.changePlan(this.props.id, this.state.value);
-        }
+        this.state.editMode && this.changeState(this.props.id, this.state.value);
     }
 
     saveByEnter = (e) => {
         if (e.key === 'Enter') {
-            this.setState({ editMode: false });
-            this.props.changePlan(this.props.id, this.state.value);
+            this.changeState(this.props.id, this.state.value);
         }
     }
 
