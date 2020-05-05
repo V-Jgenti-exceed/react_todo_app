@@ -35,14 +35,14 @@ class Itemslist extends React.Component {
         });
 
         return (
-            <React.Fragment>
+            <div className='bottom_menu'>
                 {planDraw}
                 <Filter
                     changefilterState={this.changefilterState}
                     clearCompleted={this.props.clearCompleted}
                     lenghtOfArr={count}
                 />
-            </React.Fragment>
+           </div>
         )
     }
 }

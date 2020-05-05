@@ -43,7 +43,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className='main_div'>
+        <h1>todos</h1>
         <AddItem
           createItem={this.createItem}
         />
@@ -54,7 +55,7 @@ class App extends React.Component {
           filterArray={this.filterArray}
           clearCompleted={this.clearCompleted}
         />
-      </React.Fragment>
+      </div>
     )
   }
 }
