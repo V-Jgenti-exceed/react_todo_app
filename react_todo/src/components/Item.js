@@ -37,11 +37,13 @@ class Item extends React.Component {
         }
     }
 
+
     render() {
         let className = this.props.check ? 'txt' : '';
         let showHide = this.state.editMode ? 'trumode' : 'folsemode';
+        let some = e => (e.target === 'marking') ? 'someee' : 'someeee';
         return (
-            <div className='marking' onBlur={this.onBlurHandler}>
+            <div className='marking' onBlur={this.onBlurHandler} mouseover={some}>
                 <input
                     type='text'
                     className={showHide}
@@ -61,7 +63,9 @@ class Item extends React.Component {
                     {this.props.plan}
                 </p>
                 <button
-                    onClick={this.deleteFromArr}>-</button>
+                    onClick={this.deleteFromArr}
+                    className='someeee'
+                >X</button>
             </div>
         )
     }
