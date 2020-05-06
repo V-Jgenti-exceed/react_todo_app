@@ -17,13 +17,13 @@ class AddItem extends React.Component {
             newItem.id = +new Date();
             this.props.createItem(newItem);
             this.setState({ plan: '', done: false, id: '' });
-        } 
+        }
     }
 
     render() {
         const { plan } = this.state;
         return (
-            <React.Fragment>
+            <div className='inputt'>
                 <input
                     value={plan}
                     onChange={this.onHandleChange}
@@ -31,7 +31,7 @@ class AddItem extends React.Component {
                     placeholder='What needs to be done?'
                     className='Maininput'
                 />
-            </React.Fragment>
+            </div>
         )
     }
 }

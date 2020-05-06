@@ -44,7 +44,7 @@ class Item extends React.Component {
         let some = e => (e.target === 'marking') ? 'someee' : 'someeee';
         return (
             <div className='marking' onBlur={this.onBlurHandler} mouseover={some}>
-                <input
+                <input className='someClass'
                     type='text'
                     className={showHide}
                     value={this.state.value}
