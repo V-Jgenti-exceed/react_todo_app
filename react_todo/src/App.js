@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Itemslist } from '../src/containers/Itemslist';
 import { AddItem } from '../src/components/AddItem';
+import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends React.Component {
   state = {
@@ -43,18 +44,22 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='main_div'>
-        <h1>todos</h1>
-        <AddItem
-          createItem={this.createItem}
-        />
-        <Itemslist
-          items={this.state.arrayItems}
-          deleteItem={this.deleteItem}
-          updateObject={this.updateObject}
-          filterArray={this.filterArray}
-          clearCompleted={this.clearCompleted}
-        />
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-4">
+            <h1 className='header_h1'>todos</h1>
+            <AddItem
+              createItem={this.createItem}
+            />
+            <Itemslist
+              items={this.state.arrayItems}
+              deleteItem={this.deleteItem}
+              updateObject={this.updateObject}
+              filterArray={this.filterArray}
+              clearCompleted={this.clearCompleted}
+            />
+          </div>
+        </div>
       </div>
     )
   }

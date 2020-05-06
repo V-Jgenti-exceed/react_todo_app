@@ -13,25 +13,30 @@ class AddItem extends React.Component {
 
     addByEnter = (e) => {
         if (e.key === 'Enter') {
+            if (!this.state.plan.trim()) {
+                return
+            }
             const newItem = this.state;
             newItem.id = +new Date();
             this.props.createItem(newItem);
             this.setState({ plan: '', done: false, id: '' });
-        } 
+        }
     }
 
     render() {
         const { plan } = this.state;
         return (
-            <React.Fragment>
-                <input
-                    value={plan}
-                    onChange={this.onHandleChange}
-                    onKeyPress={this.addByEnter}
-                    placeholder='What needs to be done?'
-                    className='Maininput'
-                />
-            </React.Fragment>
+            <div className="container">
+                <div className="row justify-content-center">
+                    <input
+                        value={plan}
+                        onChange={this.onHandleChange}
+                        onKeyPress={this.addByEnter}
+                        placeholder='What needs to be done?'
+                        className='Maininput'
+                    />
+                </div>
+            </div>
         )
     }
 }
