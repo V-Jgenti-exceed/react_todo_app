@@ -35,14 +35,19 @@ class Itemslist extends React.Component {
         });
 
         return (
-            <div className='bottom_menu'>
-                {planDraw}
-                <Filter
-                    changefilterState={this.changefilterState}
-                    clearCompleted={this.props.clearCompleted}
-                    lenghtOfArr={count}
-                />
-           </div>
+        
+                <div class="row justify-content-center">
+                    <div className='bottom_menu'>
+
+                        {planDraw}
+                        <Filter
+                            changefilterState={this.changefilterState}
+                            clearCompleted={this.props.clearCompleted}
+                            lenghtOfArr={count}
+                        />
+                    </div>
+                </div>
+          
         )
     }
 }
