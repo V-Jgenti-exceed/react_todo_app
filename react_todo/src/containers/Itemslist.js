@@ -36,10 +36,12 @@ class Itemslist extends React.Component {
 
         return (
         
-                <div class="row justify-content-center">
+                <div className="row justify-content-center">
                     <div className='bottom_menu'>
-
-                        {planDraw}
+                    <ul className='list-group'>
+                    {planDraw}
+                    </ul>
+                        
                         <Filter
                             changefilterState={this.changefilterState}
                             clearCompleted={this.props.clearCompleted}

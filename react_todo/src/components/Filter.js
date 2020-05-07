@@ -14,9 +14,9 @@ class Filter extends React.Component {
         return (
             <div className='bottom_menu'>
                 <p>{this.props.lenghtOfArr}</p>
-                <button type="button" class="btn btn-outline-dark" size='sm' onClick={this.filter} value='All'>All</button>
-                <button type="button" class="btn btn-outline-secondary" onClick={this.filter} value='Active'>Active</button>
-                <button type="button" class="btn btn-outline-secondary" onClick={this.filter} value='Done'>Light</button>
+                <button type="button" className="btn btn-outline-dark" size='sm' onClick={this.filter} value='All'>All</button>
+                <button type="button" className="btn btn-outline-secondary" onClick={this.filter} value='Active'>Active</button>
+                <button type="button" className="btn btn-outline-secondary" onClick={this.filter} value='Done'>Light</button>
             </div>
         )
     }

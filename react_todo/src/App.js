@@ -44,9 +44,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-4">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-4">
             <h1 className='header_h1'>todos</h1>
             <AddItem
               createItem={this.createItem}
