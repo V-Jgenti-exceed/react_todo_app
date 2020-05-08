@@ -12,14 +12,17 @@ class Filter extends React.Component {
 
     render() {
         return (
-            <div className="d-flex justify-content-center">
-                <div className="d-flex align-items-center">
-                    <p>{this.props.lenghtOfArr}</p>
-                    <button type="button" className="btn btn-outline-dark" size='sm' onClick={this.filter} value='All'>All</button>
-                    <button type="button" className="btn btn-outline-secondary" onClick={this.filter} value='Active'>Active</button>
-                    <button type="button" className="btn btn-outline-secondary" onClick={this.filter} value='Done'>Light</button>
+            // <div className="d-flex justify-content-center">
+                <div className='bottom_container'>
+                    <p>count:{this.props.lenghtOfArr}</p>
+                    <div className='buttons_container'>
+                        <button type="button" className='All' onClick={this.filter} value='All'>All</button>
+                        <button type="button" className='Active' onClick={this.filter} value='Active'>Active</button>
+                        <button type="button" className='Done' onClick={this.filter} value='Done'>Done</button>
+                    </div>
+                    <button type='button' className='clear_completed' value='Clear_Comp'>Clear completed</button>
                 </div>
-            </div>
+            // </div >
         )
     }
 }

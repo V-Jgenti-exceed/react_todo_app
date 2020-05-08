@@ -75,7 +75,7 @@ class Item extends React.Component {
 
                     />
                     <p
-                        className={`${doneUndone} ${hideClass} ${'test'} `}
+                        className={`${doneUndone} ${hideClass}  `}
                         onDoubleClick={this.editPlan}
                     >
                         {this.props.plan}
