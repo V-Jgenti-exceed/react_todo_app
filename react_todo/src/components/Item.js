@@ -48,25 +48,24 @@ class Item extends React.Component {
         const doneUndone = this.props.check ? 'txt' : '';
         const hideClass = this.state.editMode ? 'folsemode' : '';
         const showHide = this.state.editMode ? 'trumode' : 'folsemode';
-        const inputHide = this.state.editMode ? 'input_class' : 'change_input';
+        const inputHide = this.props.check ? 'round_input_checked_label' : '';
         const closeButtonHover = this.state.showDeleteButton ? 'unHideButton' : 'closeButton';
-
+        const round_label = this.props.check ? 'round_label_after' : 'closeButton';
 
         return (
-            // <div className='todo_marking' >
-
             <li className="list-group-item todo_marking"
                 onMouseEnter={this.someFunc}
                 onMouseLeave={this.someFunc}
                 onBlur={this.onBlurHandler}
             >
                 <div className="inline">
-                    <input
-                        type='checkbox'
-                        checked={this.props.check}
-                        onChange={this.checkedItem}
-                        className={inputHide}
-                    />
+                    <div className="round">
+                        <input type="checkbox" id={`${this.props.id}`}
+                            onChange={this.checkedItem}
+                            className={`round_input ${inputHide}`} />
+                        <label className="round_label" htmlFor={`${this.props.id}`}></label>
+                        <label className={round_label} htmlFor={`${this.props.id}`}></label>
+                    </div>
                     <input
                         type='text'
                         className={showHide}

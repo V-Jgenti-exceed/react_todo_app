@@ -30,7 +30,7 @@ code {
 }
 
 .Maininput {
-  width: 500px;
+  width: 370px;
   height: 45px;
   box-shadow: 0px 0px 1px 0px rgba(46, 50, 50, 0.05);
 }
@@ -51,8 +51,8 @@ code {
 
 .inline {
   display: flex;
-  width: 500px;
-  height: 55px;
+  width: 310px;
+  height: 40px;
   align-items: center;
 }
 
@@ -66,5 +66,59 @@ code {
 }
 
 .inline button {
-  margin-left: auto
+  margin-left: auto;
+  border: none;
+  background-color: white;
+  color: #FF5F5F;
 }
+
+.inline button:hover {
+  color: #FF1B1B;
+}
+
+
+
+
+
+.round {
+  position: relative;
+}
+
+.round_label {
+  background-color: #fff;
+  border: 1px solid grey;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 28px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 28px;
+}
+
+.round_label_after {
+  border: 2px solid green;
+  border-top: none;
+  border-right: none;
+  content: "";
+  height: 7px;
+  left: 7px;
+  opacity: 1;
+  position: absolute;
+  top: 8px;
+  transform: rotate(-41deg);
+  width: 12px;
+}
+
+.round_input {
+  visibility: hidden;
+}
+
+.round_input_checked_label {
+  background-color: white;
+  border-color: grey;
+}
+
+/* .round_input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+} */
