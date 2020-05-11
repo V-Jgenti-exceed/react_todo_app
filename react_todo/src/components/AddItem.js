@@ -5,6 +5,7 @@ class AddItem extends React.Component {
         plan: '',
         done: false,
         id: '',
+        editMode: false,
     }
 
     onHandleChange = (e) => {
@@ -22,6 +23,10 @@ class AddItem extends React.Component {
             this.setState({ plan: '', done: false, id: '' });
         }
     }
+
+    // ifChecked = () => {
+    //     const 
+    // }
 
     render() {
         const { plan } = this.state;

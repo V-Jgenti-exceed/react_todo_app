@@ -31,6 +31,7 @@ class App extends React.Component {
     for (let i of mainArr) {
       if (i.id === id) {
         i[par] = val;
+        i.editMode = false;
       }
     }
     this.setState({ arrayItems: mainArr });
@@ -40,6 +41,18 @@ class App extends React.Component {
     const mainArr = this.state.arrayItems;
     const filtredArr = mainArr.filter(item => !item.done);
     this.setState({ arrayItems: filtredArr });
+  }
+
+  controlInput = (id) => {
+    const newArr = this.state.arrayItems.map(i => {
+      if (i.id === id) {
+        i.editMode = true;
+      } else {
+        i.editMode = false;
+      }
+      return i;
+    })
+    this.setState({arrayItems:[...newArr]})
   }
 
   render() {
@@ -52,6 +65,8 @@ class App extends React.Component {
               createItem={this.createItem}
             />
             <Itemslist
+
+              checkInput={this.controlInput}
               items={this.state.arrayItems}
               deleteItem={this.deleteItem}
               updateObject={this.updateObject}
