@@ -16,7 +16,7 @@ class Item extends React.Component {
     }
 
     editPlan = () => {
-        if (this.props.check === true) {
+        if (this.props.check) {
             return
         }
         this.props.controleInput(this.props.id);
@@ -24,7 +24,6 @@ class Item extends React.Component {
     }
 
     inputChange = (e) => {
-
         this.setState({ value: e.target.value });
     }
 

@@ -48,7 +48,8 @@ class Itemslist extends React.Component {
                     <Filter
                         changefilterState={this.changefilterState}
                         clearCompleted={this.props.clearCompleted}
-                        lenghtOfArr={count}
+                        count={count}
+                        arrayLength={this.props.items.length}
                     />
                 </div>
             </div>

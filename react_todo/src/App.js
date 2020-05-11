@@ -55,6 +55,13 @@ class App extends React.Component {
     this.setState({arrayItems:[...newArr]})
   }
 
+  ifLength = () => {
+    const mainArr = this.state.arrayItems;
+    if (mainArr.length > 0) {
+      this.setState({})
+    }
+  }
+
   render() {
     return (
       <div className="container">
@@ -65,7 +72,6 @@ class App extends React.Component {
               createItem={this.createItem}
             />
             <Itemslist
-
               checkInput={this.controlInput}
               items={this.state.arrayItems}
               deleteItem={this.deleteItem}
