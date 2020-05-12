@@ -64,13 +64,12 @@ class App extends React.Component {
 
   checkAll = () => {
     const someClick = this.state.someClick;
-    console.log("@@@@@",someClick);
     const mainArr = this.state.arrayItems;
     const newArr = mainArr.map(item => {
       item.done = someClick;
       return item;
     })
-   this.setState({arrayItems: newArr, someClick: !someClick})
+    this.setState({ arrayItems: newArr, someClick: !someClick })
   }
 
   render() {
@@ -82,6 +81,7 @@ class App extends React.Component {
             <AddItem
               createItem={this.createItem}
               checkAll={this.checkAll}
+              item={this.state.arrayItems.length}
             />
             <Itemslist
               checkInput={this.controlInput}

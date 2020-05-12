@@ -3,10 +3,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 class Filter extends React.Component {
     state = {
-        All: '',
+        All: 'button_active',
         Active: '',
         Done: '',
         Clear: '',
+        someText: '',
     }
 
     changeState = (e) => {
@@ -33,11 +34,12 @@ class Filter extends React.Component {
 
     render() {
         const contVisibility = this.props.arrayLength ? 'bottom_container_more' : 'bottom_container';
+        const textChange = this.props.count < 2 ? 'item' : 'items';
 
         return (
             <div className={contVisibility}>
-                <p>count:{this.props.count}</p>
                 <div className='buttons_container'>
+                    <p className='text_counter'>{`${textChange} ${this.props.count}`}</p>
                     <button type="button" className={`button_style ${this.state.All}`} onClick={this.filter} value='All'>All</button>
                     <button type="button" className={`button_style ${this.state.Active}`} onClick={this.filter} value='Active'>Active</button>
                     <button type="button" className={`button_style ${this.state.Done}`} onClick={this.filter} value='Done'>Done</button>

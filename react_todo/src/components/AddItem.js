@@ -26,10 +26,11 @@ class AddItem extends React.Component {
 
     render() {
         const { plan } = this.state;
+        const targetValue = this.props.item > 0 ? 'more_then_one' : 'lower_then_one'
         return (
             <div className="container">
                 <div className="row justify-content-center">
-                    <button onClick={this.props.checkAll}>&#11015;</button>
+                    <button className={targetValue} onClick={this.props.checkAll}>&#11015;</button>
                     <input
                         value={plan}
                         onChange={this.onHandleChange}
