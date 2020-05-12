@@ -132,37 +132,28 @@ code {
   font-size: 15px;
 }
 
-.All {
-  border: 1px solid grey;
-  border-radius: 3px 3px 3px 3px;
-  background-color: white;
-  color: darkgray;
-}
-.All_noth_clicked {
+.button_style {
+  font-size: 15px;
+  color: #CECECE;
   border: none;
   background-color: white;
-  color: darkgray;
+  outline: none;
 }
-.Active {
+
+.button_active {
+  font-size: 15px;
+  color: #CECECE;
   border: none;
-  color: darkgray;
   background-color: white;
+  border: 1px solid black;
+  border-radius: 2px 2px 2px 2px;
+  outline: none;
 }
 
-.Done {
-  border: none;
-  color: darkgray;
-  background-color: white;
+.button_style:active {
+  outline: none;
 }
 
-.buttons_container {
-  margin-left: 47px;
+.button_style:focus {
+  outline: none;
 }
-
-.clear_completed {
-  border: none;
-  background: white;
-  color: darkgray;
-  font-size: 12px;
-}
-

@@ -24,15 +24,12 @@ class AddItem extends React.Component {
         }
     }
 
-    // ifChecked = () => {
-    //     const 
-    // }
-
     render() {
         const { plan } = this.state;
         return (
             <div className="container">
                 <div className="row justify-content-center">
+                    <button onClick={this.props.checkAll}>&#11015;</button>
                     <input
                         value={plan}
                         onChange={this.onHandleChange}

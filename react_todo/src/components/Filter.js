@@ -6,10 +6,11 @@ class Filter extends React.Component {
         All: '',
         Active: '',
         Done: '',
+        Clear: '',
     }
 
-    filter = (e) => {
-        let newState = {...this.state};
+    changeState = (e) => {
+        let newState = { ...this.state };
         for (let property in newState) {
             if (property === e.target.value) {
                 newState[property] = 'button_active';
@@ -18,7 +19,16 @@ class Filter extends React.Component {
             }
         }
         this.setState(newState);
+    }
+
+    filter = (e) => {
+        this.changeState(e);
         this.props.changefilterState(e.target.value);
+    }
+
+    clearCompleted = (e) => {
+        this.changeState(e);
+        this.props.clearCompleted();
     }
 
     render() {
@@ -31,8 +41,8 @@ class Filter extends React.Component {
                     <button type="button" className={`button_style ${this.state.All}`} onClick={this.filter} value='All'>All</button>
                     <button type="button" className={`button_style ${this.state.Active}`} onClick={this.filter} value='Active'>Active</button>
                     <button type="button" className={`button_style ${this.state.Done}`} onClick={this.filter} value='Done'>Done</button>
+                    <button type='button' className={`button_style ${this.state.Clear}`} onClick={this.clearCompleted} value='Clear'>Clear completed</button>
                 </div>
-                <button type='button' className='clear_completed' value='Clear_Comp'>Clear completed</button>
             </div>
         )
     }

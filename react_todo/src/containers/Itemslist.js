@@ -24,6 +24,7 @@ class Itemslist extends React.Component {
                 check={object.done}
                 updateObject={this.props.updateObject}
                 controleInput={this.props.checkInput}
+                filtredArr={this.props.clearArr}
             />;
             if (button === 'All') {
                 count++;
@@ -34,7 +35,11 @@ class Itemslist extends React.Component {
             } else if (button === 'Done' && object.done) {
                 count++;
                 return item;
+            } else if (button === 'Clear' && !object.done) {
+                count++;
+                return item;
             }
+
         });
 
         return (
@@ -47,9 +52,9 @@ class Itemslist extends React.Component {
 
                     <Filter
                         changefilterState={this.changefilterState}
-                        clearCompleted={this.props.clearCompleted}
                         count={count}
                         arrayLength={this.props.items.length}
+                        clearCompleted={this.props.clearArr}
                     />
                 </div>
             </div>
