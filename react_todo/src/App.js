@@ -46,20 +46,13 @@ class App extends React.Component {
       }
       return i;
     })
-    this.setState({ arrayItems: [...newArr] })
-  }
-
-  ifLength = () => {
-    const mainArr = this.state.arrayItems;
-    if (mainArr.length > 0) {
-      this.setState({})
-    }
+    this.setState({ arrayItems: [...newArr] });
   }
 
   clearCompleted = () => {
     const mainArr = [...this.state.arrayItems];
     const filtredArr = mainArr.filter(item => !item.done);
-    this.setState({ arrayItems: filtredArr })
+    this.setState({ arrayItems: filtredArr });
   }
 
   checkAll = () => {
@@ -69,7 +62,7 @@ class App extends React.Component {
       item.done = someClick;
       return item;
     })
-    this.setState({ arrayItems: newArr, someClick: !someClick })
+    this.setState({ arrayItems: newArr, someClick: !someClick });
   }
 
   render() {
@@ -82,6 +75,7 @@ class App extends React.Component {
               createItem={this.createItem}
               checkAll={this.checkAll}
               item={this.state.arrayItems.length}
+              click={this.state.someClick}
             />
             <Itemslist
               checkInput={this.controlInput}
