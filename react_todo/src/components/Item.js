@@ -53,7 +53,6 @@ class Item extends React.Component {
         const closeButtonHover = this.state.showDeleteButton ? 'unHideButton' : 'closeButton';
         const round_label = this.props.check ? 'round_label_after' : 'closeButton';
 
-
         return (
             <li className="list-group-item todo_marking"
                 onMouseEnter={this.someFunc}
