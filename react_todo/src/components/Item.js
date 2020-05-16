@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 class Item extends React.Component {
     state = {
-        editMode: false,
         value: '',
+        showDeleteButton: false,
     }
 
     deleteFromArr = () => {
@@ -16,7 +16,11 @@ class Item extends React.Component {
     }
 
     editPlan = () => {
-        this.setState({ editMode: true, value: this.props.plan });
+        if (this.props.check) {
+            return;
+        }
+        this.props.controleInput(this.props.id);
+        this.setState({ value: this.props.plan });
     }
 
     inputChange = (e) => {
@@ -24,12 +28,11 @@ class Item extends React.Component {
     }
 
     changeState = (prop, value) => {
-        this.setState({ editMode: false });
         this.props.updateObject(prop, value, 'plan');
     }
 
     onBlurHandler = () => {
-        this.state.editMode && this.changeState(this.props.id, this.state.value);
+        this.props.editMode && this.changeState(this.props.id, this.state.value);
     }
 
     saveByEnter = (e) => {
@@ -38,40 +41,51 @@ class Item extends React.Component {
         }
     }
 
+    someFunc = () => {
+        this.setState({ showDeleteButton: !this.state.showDeleteButton });
+    }
 
     render() {
-        let className = this.props.check ? 'txt' : '';
-        let showHide = this.state.editMode ? 'trumode' : 'folsemode';
-        let some = e => (e.target === 'marking') ? 'someee' : 'someeee';
+        const doneUndone = this.props.check ? 'txt' : '';
+        const hideClass = this.props.editMode ? 'folsemode' : '';
+        const showHide = this.props.editMode ? 'trumode' : 'folsemode';
+        const inputHide = this.props.check ? 'round_input_checked_label' : '';
+        const closeButtonHover = this.state.showDeleteButton ? 'unHideButton' : 'closeButton';
+        const round_label = this.props.check ? 'round_label_after' : 'closeButton';
+
         return (
-            <div className='todo_marking' onBlur={this.onBlurHandler} mouseover={some}>
-                <ul className='list-group'>
-                    <li className="list-group-item">
-                        <input
-                            type='text'
-                            className={showHide}
-                            value={this.state.value}
-                            onChange={this.inputChange}
-                            onKeyDown={this.saveByEnter}
-                        />
-                        <input
-                            type='checkbox'
-                            checked={this.props.check}
+            <li className="list-group-item todo_marking"
+                onMouseEnter={this.someFunc}
+                onMouseLeave={this.someFunc}
+                onBlur={this.onBlurHandler}
+            >
+                <div className="inline">
+                    <div className="round">
+                        <input type="checkbox" id={`${this.props.id}`}
                             onChange={this.checkedItem}
-                        />
-                        <p
-                            className={className}
-                            className='text_todo'
-                            onDoubleClick={this.editPlan}
-                        >
-                            {this.props.plan}
-                        </p>
-                        <button type="button" class="close" aria-label="Close" onClick={this.deleteFromArr}>
-                            <span aria-hidden="false">&times;</span>
-                        </button>
-                    </li>
-                </ul>
-            </div>
+                            className={`round_input ${inputHide}`} />
+                        <label className="round_label" htmlFor={`${this.props.id}`}></label>
+                        <label className={round_label} htmlFor={`${this.props.id}`}></label>
+                    </div>
+                    <input
+                        type='text'
+                        className={showHide}
+                        value={this.state.value}
+                        onChange={this.inputChange}
+                        onKeyDown={this.saveByEnter}
+                    />
+                    <p
+                        className={`${doneUndone} ${hideClass}`}
+                        onDoubleClick={this.editPlan}
+                    >
+                        {this.props.plan}
+                    </p>
+                    <button
+                        onClick={this.deleteFromArr}
+                        className={`${closeButtonHover} inlineButton`}
+                    >X</button>
+                </div>
+            </li >
         )
     }
 }

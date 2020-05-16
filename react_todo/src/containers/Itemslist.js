@@ -11,16 +11,20 @@ class Itemslist extends React.Component {
         this.setState({ filterState: button });
     }
 
+
     render() {
         let count = 0;
         const button = this.state.filterState;
         const planDraw = this.props.items.map((object, index) => {
             const item = <Item key={index}
+                editMode={object.editMode}
                 plan={object.plan}
                 dell={this.props.deleteItem}
                 id={object.id}
                 check={object.done}
                 updateObject={this.props.updateObject}
+                controleInput={this.props.checkInput}
+                filtredArr={this.props.clearArr}
             />;
             if (button === 'All') {
                 count++;
@@ -31,23 +35,30 @@ class Itemslist extends React.Component {
             } else if (button === 'Done' && object.done) {
                 count++;
                 return item;
+            } else if (button === 'Clear' && !object.done) {
+                count++;
+                return item;
             }
+
         });
 
         return (
-        
-                <div class="row justify-content-center">
-                    <div className='bottom_menu'>
 
+            <div className="row justify-content-center">
+                <div className='bottom_menu'>
+                    <ul className='list-group'>
                         {planDraw}
-                        <Filter
-                            changefilterState={this.changefilterState}
-                            clearCompleted={this.props.clearCompleted}
-                            lenghtOfArr={count}
-                        />
-                    </div>
+                    </ul>
+
+                    <Filter
+                        changefilterState={this.changefilterState}
+                        count={count}
+                        arrayLength={this.props.items.length}
+                        clearCompleted={this.props.clearArr}
+                    />
                 </div>
-          
+            </div>
+
         )
     }
 }
