@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import { Itemslist } from '../src/containers/Itemslist';
 import { AddItem } from '../src/components/AddItem';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -10,32 +11,38 @@ class App extends React.Component {
     someClick: true,
   }
 
-  //add plan
+  // add plan
   createItem = (item) => {
     const array = [...this.state.arrayItems];
-    this.setState({ arrayItems: [item, ...array] });
-  }
+    this.setState({ arrayItems: [...array, item] });
+  };
 
   //delete plan
   deleteItem = (id) => {
-    const stateArr = this.state.arrayItems;
-    const dellArr = stateArr.filter((item) => {
-      return item.id !== id;
-    })
-    this.setState({ arrayItems: dellArr });
-  }
+    axios.delete(`http://localhost:1996/task/${id}/delete`)
+      .then(res => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          this.setState({ arrayItems: res.data.result });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  };
 
   //done undone
   updateObject = (id, val, par) => {
-    const mainArr = this.state.arrayItems;
-    for (let i of mainArr) {
-      if (i.id === id) {
-        i[par] = val;
-        i.editMode = false;
-      }
-    }
-    this.setState({ arrayItems: mainArr });
-  }
+    console.log('par', id,val,par);
+    axios.put(`http://localhost:1996/task/${id}/update`, { [par]: val })
+      .then(res => {
+        this.setState({ arrayItems: res.data.result });
+      })
+      .catch(error => {
+        alert(error);
+      })
+  };
 
   controlInput = (id) => {
     const newArr = this.state.arrayItems.map(i => {
@@ -47,13 +54,13 @@ class App extends React.Component {
       return i;
     })
     this.setState({ arrayItems: [...newArr] });
-  }
+  };
 
   clearCompleted = () => {
     const mainArr = [...this.state.arrayItems];
     const filtredArr = mainArr.filter(item => !item.done);
     this.setState({ arrayItems: filtredArr });
-  }
+  };
 
   checkAll = () => {
     const someClick = this.state.someClick;
@@ -63,7 +70,17 @@ class App extends React.Component {
       return item;
     })
     this.setState({ arrayItems: newArr, someClick: !someClick });
-  }
+  };
+
+  componentDidMount() {
+    axios.get('http://localhost:1996/task/get')
+      .then(res => {
+        this.setState({ arrayItems: res.data.result })
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  };
 
   render() {
     return (

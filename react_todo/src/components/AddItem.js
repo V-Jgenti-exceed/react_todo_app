@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class AddItem extends React.Component {
     state = {
@@ -18,12 +19,17 @@ class AddItem extends React.Component {
             if (!this.state.plan.trim()) {
                 return;
             }
-            const newItem = this.state;
-            newItem.id = +new Date();
-            this.props.createItem(newItem);
-            this.setState({ plan: '', done: false, id: '' });
-        }
-    }
+            const plan = this.state.plan;
+            axios.post('http://localhost:1996/task/create', { plan })
+                .then(response => {
+                    this.props.createItem(response.data.result);
+                    this.setState({ plan: '' });
+                })
+                .catch(error => {
+                    console.log("error", error);
+                })
+        };
+    };
 
     render() {
         const { plan } = this.state;
@@ -47,5 +53,4 @@ class AddItem extends React.Component {
         )
     }
 }
-
-export { AddItem }
+export { AddItem } 

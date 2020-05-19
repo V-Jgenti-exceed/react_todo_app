@@ -34,7 +34,7 @@ class Filter extends React.Component {
 
     render() {
         const contVisibility = this.props.arrayLength ? 'bottom_container_more' : 'bottom_container';
-        const textChange = this.props.count < 2 ? 'item' : 'items';
+        const textChange = this.props.count < 2 ? 'item left' : 'items left';
         return (
             <div className={contVisibility}>
                 <div className='buttons_container'>
