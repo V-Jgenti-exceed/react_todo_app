@@ -12,6 +12,7 @@ class Item extends React.Component {
     }
 
     checkedItem = (e) => {
+        console.log('@@@@@@@@checkedItem');
         this.props.updateObject(this.props.id, e.target.checked, 'done');
     }
 
@@ -36,6 +37,7 @@ class Item extends React.Component {
     }
 
     saveByEnter = (e) => {
+        console.log('changeState');
         if (e.key === 'Enter') {
             this.changeState(this.props.id, this.state.value);
         }

@@ -20,7 +20,7 @@ class Itemslist extends React.Component {
                 editMode={object.editMode}
                 plan={object.plan}
                 dell={this.props.deleteItem}
-                id={object.id}
+                id={object._id}
                 check={object.done}
                 updateObject={this.props.updateObject}
                 controleInput={this.props.checkInput}
