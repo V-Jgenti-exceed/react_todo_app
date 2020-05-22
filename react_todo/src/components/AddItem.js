@@ -20,7 +20,7 @@ class AddItem extends React.Component {
                 return;
             }
             const plan = this.state.plan;
-            axios.post('http://localhost:1996/task/create', { plan })
+            axios.post('https://georgiantodo.herokuapp.com/task/create', { plan })
                 .then(response => {
                     this.props.createItem(response.data.result);
                     this.setState({ plan: '' });
@@ -32,7 +32,7 @@ class AddItem extends React.Component {
     };
 
     checkAllFunc = () => {
-        axios.put('http://localhost:1996/task/checkall', { done: !this.state.done })
+        axios.put('https://georgiantodo.herokuapp.com/task/checkall', { done: !this.state.done })
             .then(res => {
                 console.log('res.data.result', res.data.result);
                 this.props.checkAll(res.data.result);

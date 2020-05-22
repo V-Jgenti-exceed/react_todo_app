@@ -19,7 +19,7 @@ class App extends React.Component {
 
   //delete plan
   deleteItem = (id) => {
-    axios.delete(`http://localhost:1996/task/${id}/delete`)
+    axios.delete(`https://georgiantodo.herokuapp.com/task/${id}/delete`)
       .then(res => {
         if (res.data.error) {
           alert(res.data.error);
@@ -34,7 +34,7 @@ class App extends React.Component {
 
   //done undone
   updateObject = (id, val, par) => {
-    axios.put(`http://localhost:1996/task/${id}/update`, { [par]: val })
+    axios.put(`https://georgiantodo.herokuapp.com/task/${id}/update`, { [par]: val })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       })
@@ -44,7 +44,7 @@ class App extends React.Component {
   };
 
   controlInput = (id, updateTitle) => {
-    axios.put(`http://localhost:1996/task/${id}/changeplan`, { plan: updateTitle })
+    axios.put(`https://georgiantodo.herokuapp.com/task/${id}/changeplan`, { plan: updateTitle })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       }).catch(error => {
@@ -61,7 +61,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    axios.get('http://localhost:1996/task/get')
+    axios.get('https://georgiantodo.herokuapp.com/task/get')
       .then(res => {
         this.setState({ arrayItems: res.data.result })
       })
