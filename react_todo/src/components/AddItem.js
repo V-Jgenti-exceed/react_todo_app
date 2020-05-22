@@ -31,6 +31,20 @@ class AddItem extends React.Component {
         };
     };
 
+    checkAllFunc = () => {
+        axios.put('http://localhost:1996/task/checkall', { done: !this.state.done })
+            .then(res => {
+                console.log('res.data.result', res.data.result);
+                this.props.checkAll(res.data.result);
+                this.setState({ done: !this.state.done });
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }
+
+
+
     render() {
         const { plan } = this.state;
         const targetValue = this.props.item > 0 ? 'more_then_one' : 'lower_then_one';
@@ -38,7 +52,7 @@ class AddItem extends React.Component {
         return (
             <div className="container">
                 <div className="row justify-content-center">
-                    <button className={`${targetValue} ${changeOnClick}`} onClick={this.props.checkAll} title='Click for check and uncheck plans'>❱</button>
+                    <button className={`${targetValue} ${changeOnClick}`} onClick={this.checkAllFunc} title='Click for check and uncheck plans'>❱</button>
                     <input
                         className="form-control form-control-lg"
                         type="text"
@@ -53,4 +67,5 @@ class AddItem extends React.Component {
         )
     }
 }
+
 export { AddItem } 

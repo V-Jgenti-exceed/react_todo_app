@@ -34,7 +34,6 @@ class App extends React.Component {
 
   //done undone
   updateObject = (id, val, par) => {
-    console.log('par', id,val,par);
     axios.put(`http://localhost:1996/task/${id}/update`, { [par]: val })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
@@ -44,32 +43,21 @@ class App extends React.Component {
       })
   };
 
-  controlInput = (id) => {
-    const newArr = this.state.arrayItems.map(i => {
-      if (i.id === id) {
-        i.editMode = true;
-      } else {
-        i.editMode = false;
-      }
-      return i;
-    })
-    this.setState({ arrayItems: [...newArr] });
+  controlInput = (id, updateTitle) => {
+    axios.put(`http://localhost:1996/task/${id}/changeplan`, { plan: updateTitle })
+      .then(res => {
+        this.setState({ arrayItems: res.data.result });
+      }).catch(error => {
+        alert(error);
+      });
   };
 
-  clearCompleted = () => {
-    const mainArr = [...this.state.arrayItems];
-    const filtredArr = mainArr.filter(item => !item.done);
-    this.setState({ arrayItems: filtredArr });
+  clearCompleted = (res) => {
+    this.setState({ arrayItems: [...res] });
   };
 
-  checkAll = () => {
-    const someClick = this.state.someClick;
-    const mainArr = this.state.arrayItems;
-    const newArr = mainArr.map(item => {
-      item.done = someClick;
-      return item;
-    })
-    this.setState({ arrayItems: newArr, someClick: !someClick });
+  checkAll = (res) => {
+    this.setState({ arrayItems: [...res] });
   };
 
   componentDidMount() {
@@ -93,6 +81,7 @@ class App extends React.Component {
               checkAll={this.checkAll}
               item={this.state.arrayItems.length}
               click={this.state.someClick}
+              mainArr={this.state.arrayItems}
             />
             <Itemslist
               checkInput={this.controlInput}

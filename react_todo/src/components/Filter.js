@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import axios from 'axios';
 
 class Filter extends React.Component {
     state = {
@@ -29,7 +30,10 @@ class Filter extends React.Component {
 
     clearCompleted = (e) => {
         this.changeState(e);
-        this.props.clearCompleted();
+        axios.delete('http://localhost:1996/task/delete', { data: {done:true} })
+            .then(res => {
+                this.props.clearCompleted(res.data.result);
+            })
     }
 
     render() {

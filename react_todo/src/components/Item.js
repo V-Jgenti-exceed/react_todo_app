@@ -1,56 +1,58 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import axios from 'axios';
 
 class Item extends React.Component {
     state = {
         value: '',
         showDeleteButton: false,
-    }
+        editMode: false,
+        plan: this.props.plan,
+    };
 
     deleteFromArr = () => {
         this.props.dell(this.props.id);
     }
 
     checkedItem = (e) => {
-        console.log('@@@@@@@@checkedItem');
         this.props.updateObject(this.props.id, e.target.checked, 'done');
-    }
+    };
 
     editPlan = () => {
         if (this.props.check) {
             return;
         }
-        this.props.controleInput(this.props.id);
-        this.setState({ value: this.props.plan });
-    }
+        this.setState({ editMode: true, value: this.props.plan });
+    };
 
     inputChange = (e) => {
         this.setState({ value: e.target.value });
-    }
+    };
 
     changeState = (prop, value) => {
         this.props.updateObject(prop, value, 'plan');
-    }
+    };
 
     onBlurHandler = () => {
-        this.props.editMode && this.changeState(this.props.id, this.state.value);
-    }
+        axios.
+        this.state.editMode && this.changeState(this.props.id, this.state.value);
+    };
 
-    saveByEnter = (e) => {
-        console.log('changeState');
+    saveByEnter = async (e) => {
         if (e.key === 'Enter') {
-            this.changeState(this.props.id, this.state.value);
+            this.props.controleInput(this.props.id, e.target.value);
+            this.setState({ editMode: false });
         }
-    }
+    };
 
     someFunc = () => {
         this.setState({ showDeleteButton: !this.state.showDeleteButton });
-    }
+    };
 
     render() {
         const doneUndone = this.props.check ? 'txt' : '';
-        const hideClass = this.props.editMode ? 'folsemode' : '';
-        const showHide = this.props.editMode ? 'trumode' : 'folsemode';
+        const hideClass = this.state.editMode ? 'folsemode' : '';
+        const showHide = this.state.editMode ? 'trumode' : 'folsemode';
         const inputHide = this.props.check ? 'round_input_checked_label' : '';
         const closeButtonHover = this.state.showDeleteButton ? 'unHideButton' : 'closeButton';
         const round_label = this.props.check ? 'round_label_after' : 'closeButton';
