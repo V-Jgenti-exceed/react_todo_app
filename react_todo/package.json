@@ -14,7 +14,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "start": "node server.js",
+    "start": "node server/server.js",
     "node": "v13.12.x"
   },
   "scripts": {
