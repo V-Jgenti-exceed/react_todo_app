@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Itemslist } from '../src/containers/Itemslist';
 import { AddItem } from '../src/components/AddItem';
-import {Mainreg} from '../src/registration/Mainreg';
 import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends React.Component {
