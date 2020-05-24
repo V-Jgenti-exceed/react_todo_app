@@ -10,12 +10,11 @@
     "bootstrap": "^4.5.0",
     "express": "^4.17.1",
     "express-favicon": "^2.0.1",
+    "node": "12.16.3",
     "path": "^0.12.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
-    "start": "node server/server.js",
-    "node": "12.16.3"
+    "react-scripts": "^3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
