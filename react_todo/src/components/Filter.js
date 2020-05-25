@@ -1,5 +1,4 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 
 class Filter extends React.Component {
