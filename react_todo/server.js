@@ -14,7 +14,7 @@ app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 app.get('/', function (req, res) {
-    res.redirect('/todo');
+    res.redirect('/REACT_TODO');
 });
 app.listen(port, () => {
     console.log('server is up and working on port' + port);
