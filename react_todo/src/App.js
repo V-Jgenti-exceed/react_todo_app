@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import './custom.scss';
+import 'bootstrap/dist/css/bootstrap.css';
 import { Itemslist } from '../src/containers/Itemslist';
 import { AddItem } from '../src/components/AddItem';
 
