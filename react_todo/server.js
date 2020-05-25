@@ -10,12 +10,15 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.get('/ping', function (req, res) {
     return res.send('pong');
 });
-app.get('/*', function (req, res) {
+app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-app.get('/', function (req, res) {
-    res.redirect('/REACT_TODO');
+
+//healt check
+app.get('/health_check', (req, res) => {
+    res.status(200).send('health check is working correctly');
 });
+
 app.listen(port, () => {
     console.log('server is up and working on port' + port);
 });
