@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "cross-env": "7.0.2",
-    "css-loader": "^3.5.3",
-    "style-loader": "^1.2.1"
+    "css-loader": "3.5.3",
+    "style-loader": "1.2.1"
   }
 }
