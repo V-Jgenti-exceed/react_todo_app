@@ -50,19 +50,17 @@ class AddItem extends React.Component {
         const targetValue = this.props.item > 0 ? 'more_then_one' : 'lower_then_one';
         const changeOnClick = this.props.click ? 'more_then_one' : 'clicked';
         return (
-            <div className="container">
-                <div className="row justify-content-center">
-                    <button className={`${targetValue} ${changeOnClick}`} onClick={this.checkAllFunc} title='Click for check and uncheck plans'>❱</button>
-                    <input
-                        className="form-control form-control-lg"
-                        type="text"
-                        placeholder="What needs to be done?"
-                        value={plan}
-                        onChange={this.onHandleChange}
-                        onKeyPress={this.addByEnter}
-                    >
-                    </input>
-                </div>
+            <div className='main_input_container'>
+                <button className={`${targetValue} ${changeOnClick}`} onClick={this.checkAllFunc} title='Click for check and uncheck plans'>❱</button>
+                <input
+                    className="main_input"
+                    type="text"
+                    placeholder="What needs to be done?"
+                    value={plan}
+                    onChange={this.onHandleChange}
+                    onKeyPress={this.addByEnter}
+                >
+                </input>
             </div>
         )
     }

@@ -35,7 +35,7 @@ class Item extends React.Component {
 
     onBlurHandler = () => {
         axios.
-        this.state.editMode && this.changeState(this.props.id, this.state.value);
+            this.state.editMode && this.changeState(this.props.id, this.state.value);
     };
 
     saveByEnter = async (e) => {
@@ -58,38 +58,34 @@ class Item extends React.Component {
         const round_label = this.props.check ? 'round_label_after' : 'closeButton';
 
         return (
-            <li className="list-group-item todo_marking"
+            <div className="todo_items">
                 onMouseEnter={this.someFunc}
                 onMouseLeave={this.someFunc}
                 onBlur={this.onBlurHandler}
             >
-                <div className="inline">
-                    <div className="round">
-                        <input type="checkbox" id={`${this.props.id}`}
-                            onChange={this.checkedItem}
-                            className={`round_input ${inputHide}`} />
-                        <label className="round_label" htmlFor={`${this.props.id}`}></label>
-                        <label className={round_label} htmlFor={`${this.props.id}`}></label>
-                    </div>
-                    <input
-                        type='text'
-                        className={showHide}
-                        value={this.state.value}
-                        onChange={this.inputChange}
-                        onKeyDown={this.saveByEnter}
-                    />
-                    <p
-                        className={`${doneUndone} ${hideClass}`}
-                        onDoubleClick={this.editPlan}
-                    >
-                        {this.props.plan}
-                    </p>
-                    <button
-                        onClick={this.deleteFromArr}
-                        className={`${closeButtonHover} inlineButton`}
-                    >X</button>
-                </div>
-            </li >
+                <input type="checkbox" id={`${this.props.id}`}
+                    onChange={this.checkedItem}
+                    className={`round_input ${inputHide}`} />
+                <label className="round_label" htmlFor={`${this.props.id}`}></label>
+                <label className={round_label} htmlFor={`${this.props.id}`}></label>
+                <input
+                    type='text'
+                    className={showHide}
+                    value={this.state.value}
+                    onChange={this.inputChange}
+                    onKeyDown={this.saveByEnter}
+                />
+                <p
+                    className={`${doneUndone} ${hideClass}`}
+                    onDoubleClick={this.editPlan}
+                >
+                    {this.props.plan}
+                </p>
+                <button
+                    onClick={this.deleteFromArr}
+                    className={`${closeButtonHover} inlineButton`}
+                >X</button>
+            </div>
         )
     }
 }

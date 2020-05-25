@@ -73,27 +73,23 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-4">
-            <h1 className='header_h1'>todos</h1>
-            <AddItem
-              createItem={this.createItem}
-              checkAll={this.checkAll}
-              item={this.state.arrayItems.length}
-              click={this.state.someClick}
-              mainArr={this.state.arrayItems}
-            />
-            <Itemslist
-              checkInput={this.controlInput}
-              items={this.state.arrayItems}
-              deleteItem={this.deleteItem}
-              updateObject={this.updateObject}
-              filterArray={this.filterArray}
-              clearArr={this.clearCompleted}
-            />
-          </div>
-        </div>
+      <div className='main_container'>
+        <h1 className='header_h1'>todos</h1>
+        <AddItem
+          createItem={this.createItem}
+          checkAll={this.checkAll}
+          item={this.state.arrayItems.length}
+          click={this.state.someClick}
+          mainArr={this.state.arrayItems}
+        />
+        <Itemslist
+          checkInput={this.controlInput}
+          items={this.state.arrayItems}
+          deleteItem={this.deleteItem}
+          updateObject={this.updateObject}
+          filterArray={this.filterArray}
+          clearArr={this.clearCompleted}
+        />
       </div>
     )
   }
