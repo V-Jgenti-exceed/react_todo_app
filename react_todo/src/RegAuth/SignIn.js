@@ -23,7 +23,14 @@ class SignIn extends React.Component {
         axios.post('http://localhost:4000/auth/login', {
             email: this.state.email,
             password: this.state.password,
-        });
+        })
+            .then(res => {
+                console.log('@@@@RES', res.data.token);
+                localStorage.setItem("token", res.data.token);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     };
 
     render() {
