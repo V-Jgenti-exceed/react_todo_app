@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import { Route, Redirect } from 'react-router-dom';
 
 class SignIn extends React.Component {
     state = {
@@ -25,11 +26,11 @@ class SignIn extends React.Component {
             password: this.state.password,
         })
             .then(res => {
-                console.log('@@@@RES', res.data.token);
+                console.log('@@@@@RES', res);
                 localStorage.setItem("token", res.data.token);
             })
             .catch(error => {
-                console.log(error);
+                alert(error);
             })
     };
 

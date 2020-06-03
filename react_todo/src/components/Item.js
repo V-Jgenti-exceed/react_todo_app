@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 class Item extends React.Component {
     state = {
@@ -32,10 +31,10 @@ class Item extends React.Component {
         this.props.updateObject(prop, value, 'plan');
     };
 
-    onBlurHandler = () => {
-        axios.
-        this.state.editMode && this.changeState(this.props.id, this.state.value);
-    };
+    // onBlurHandler = () => {
+    //     axios.
+    //     this.state.editMode && this.changeState(this.props.id, this.state.value);
+    // };
 
     saveByEnter = async (e) => {
         if (e.key === 'Enter') {
@@ -60,7 +59,7 @@ class Item extends React.Component {
             <li className="list-group-item todo_marking"
                 onMouseEnter={this.someFunc}
                 onMouseLeave={this.someFunc}
-                onBlur={this.onBlurHandler}
+            // onBlur={this.onBlurHandler}
             >
                 <div className="inline">
                     <div className="round">
