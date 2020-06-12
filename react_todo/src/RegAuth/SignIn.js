@@ -69,6 +69,11 @@ class SignIn extends React.Component {
                     console.log(error);
                 })
         };
+
+        const registerFunc = () => {
+            this.props.history.push('/register');
+        }
+
         return (
             <div className='signIn'>
                 <div className='signIn_element'>
@@ -92,7 +97,7 @@ class SignIn extends React.Component {
                         Log in
                  </Button>
                     <Button
-                        href='/register'
+                        onClick={registerFunc}
                     >
                         Register account
                  </Button>
