@@ -5,19 +5,20 @@ import Button from '@material-ui/core/Button';
 import { Itemslist } from '../src/containers/Itemslist';
 import { AddItem } from '../src/components/AddItem';
 import * as Helper from './helpers';
+import { heroUrl, localHostUrl, port, conf } from './config/index';
 
 class App extends React.Component {
   state = {
     arrayItems: [],
     someClick: true,
     authorization: null,
-    logOut: false
+    logOut: false,
   }
 
   componentDidMount() {
     const token = Helper.getTokenFromLS();
     if (token) {
-      axios.get('http://localhost:4000/task/get', { headers: { authorization: token } })
+      axios.get(`${heroUrl}${conf.didMount}`, { headers: { authorization: token } })
         .then(res => {
           this.setState({ arrayItems: res.data.result, authorization: token, logOut: false })
         })
@@ -36,7 +37,7 @@ class App extends React.Component {
 
   //delete plan
   deleteItem = (id) => {
-    axios.delete(`http://localhost:4000/task/delete/${id}`, { headers: { authorization: this.state.authorization } })
+    axios.delete(`${heroUrl}${conf.didMount}${id}`, { headers: { authorization: this.state.authorization } })
       .then(res => {
         if (res.data.error) {
           alert(res.data.error);
@@ -51,7 +52,7 @@ class App extends React.Component {
 
   //done undone
   updateObject = (id, val, par) => {
-    axios.put(`http://localhost:4000/task/${id}/update`, { [par]: val }, { authorization: this.state.authorization })
+    axios.put(`${heroUrl}${conf.updateObject}`, { [par]: val }, { authorization: this.state.authorization })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       })
@@ -61,7 +62,7 @@ class App extends React.Component {
   };
 
   controlInput = (id, updateTitle) => {
-    axios.put(`http://localhost:4000/task/${id}/changeplan`, { plan: updateTitle }, { authorization: this.state.authorization })
+    axios.put(`${heroUrl}${conf.controlInput}`, { plan: updateTitle }, { authorization: this.state.authorization })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       }).catch(error => {
