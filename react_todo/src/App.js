@@ -1,14 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
 import { Itemslist } from '../src/containers/Itemslist';
 import { AddItem } from '../src/components/AddItem';
+import * as Helper from './helpers';
 
 class App extends React.Component {
   state = {
     arrayItems: [],
     someClick: true,
+    authorization: null,
+    logOut: false
   }
+
+  componentDidMount() {
+    const token = Helper.getTokenFromLS();
+    if (token) {
+      axios.get('http://localhost:4000/task/get', { headers: { authorization: token } })
+        .then(res => {
+          this.setState({ arrayItems: res.data.result, authorization: token, logOut: false })
+        })
+        .catch(error => {
+          console.log(error);
+        })
+    }
+  };
+
 
   // add plan
   createItem = (item) => {
@@ -18,7 +36,7 @@ class App extends React.Component {
 
   //delete plan
   deleteItem = (id) => {
-    axios.delete(`https://georgiantodo.herokuapp.com/task/${id}/delete`)
+    axios.delete(`http://localhost:4000/task/delete/${id}`, { headers: { authorization: this.state.authorization } })
       .then(res => {
         if (res.data.error) {
           alert(res.data.error);
@@ -33,7 +51,7 @@ class App extends React.Component {
 
   //done undone
   updateObject = (id, val, par) => {
-    axios.put(`https://georgiantodo.herokuapp.com/task/${id}/update`, { [par]: val })
+    axios.put(`http://localhost:4000/task/${id}/update`, { [par]: val }, { authorization: this.state.authorization })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       })
@@ -43,7 +61,7 @@ class App extends React.Component {
   };
 
   controlInput = (id, updateTitle) => {
-    axios.put(`https://georgiantodo.herokuapp.com/task/${id}/changeplan`, { plan: updateTitle })
+    axios.put(`http://localhost:4000/task/${id}/changeplan`, { plan: updateTitle }, { authorization: this.state.authorization })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       }).catch(error => {
@@ -51,25 +69,30 @@ class App extends React.Component {
       });
   };
 
+  //delete all checked tasks
   clearCompleted = (res) => {
     this.setState({ arrayItems: [...res] });
   };
 
+  //checkAllTask
   checkAll = (res) => {
     this.setState({ arrayItems: [...res] });
   };
 
-  componentDidMount() {
-    axios.get('https://georgiantodo.herokuapp.com/task/get')
-      .then(res => {
-        this.setState({ arrayItems: res.data.result })
-      })
-      .catch(error => {
-        console.log(error);
-      })
+  auth = (token) => {
+    this.setState({ authorization: token });
+  }
+
+  logOut = () => {
+    localStorage.clear();
+    this.setState({ logOut: true });
   };
 
+  // RENDER
   render() {
+    if (this.state.logOut) {
+      setTimeout(window.location = "http://localhost:3000/login", 2000);
+    };
     return (
       <div className="container">
         <div className="row justify-content-center">
@@ -90,6 +113,11 @@ class App extends React.Component {
               filterArray={this.filterArray}
               clearArr={this.clearCompleted}
             />
+            <Button
+              onClick={this.logOut}
+            >
+              Log out :(
+            </Button>
           </div>
         </div>
       </div>
