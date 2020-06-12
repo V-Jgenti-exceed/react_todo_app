@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { heroUrl } from '../config/index';
 
 class Filter extends React.Component {
     state = {
@@ -29,7 +30,7 @@ class Filter extends React.Component {
 
     clearCompleted = (e) => {
         this.changeState(e);
-        axios.delete('http://localhost:4000/task/delete', { data: {done:true} })
+        axios.delete(`${heroUrl}task/delete`, { data: { done: true } })
             .then(res => {
                 this.props.clearCompleted(res.data.result);
             })

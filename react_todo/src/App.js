@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import { Itemslist } from '../src/containers/Itemslist';
 import { AddItem } from '../src/components/AddItem';
 import * as Helper from './helpers';
-import { heroUrl, localHostUrl, port, conf } from './config/index';
+import { heroUrl } from './config/index';
 
 class App extends React.Component {
   state = {
@@ -16,10 +16,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log("@@@@@@@@@@@@@@conf", conf)
+
     const token = Helper.getTokenFromLS();
     if (token) {
-      axios.get(`${heroUrl}${conf.didMount}`, { headers: { authorization: token } })
+      axios.get(`${heroUrl}task/get/`, { headers: { authorization: token } })
         .then(res => {
           this.setState({ arrayItems: res.data.result, authorization: token, logOut: false })
         })
@@ -37,7 +37,7 @@ class App extends React.Component {
 
   //delete plan
   deleteItem = (id) => {
-    axios.delete(`${heroUrl}${conf.didMount}`, { headers: { authorization: this.state.authorization } })
+    axios.delete(`${heroUrl}task/delete/${id}`, { headers: { authorization: this.state.authorization } })
       .then(res => {
         if (res.data.error) {
           alert(res.data.error);
@@ -52,7 +52,7 @@ class App extends React.Component {
 
   //done undone
   updateObject = (id, val, par) => {
-    axios.put(`${heroUrl}${conf.updateObject}`, { [par]: val }, { authorization: this.state.authorization })
+    axios.put(`${heroUrl}task/${id}/update/`, { [par]: val }, { authorization: this.state.authorization })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       })
@@ -62,7 +62,7 @@ class App extends React.Component {
   };
 
   controlInput = (id, updateTitle) => {
-    axios.put(`${heroUrl}${conf.controlInput}`, { plan: updateTitle }, { authorization: this.state.authorization })
+    axios.put(`${heroUrl}task/${id}/changeplan/`, { plan: updateTitle }, { authorization: this.state.authorization })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       }).catch(error => {
@@ -92,7 +92,7 @@ class App extends React.Component {
   // RENDER
   render() {
     if (this.state.logOut) {
-      setTimeout(window.location = "http://localhost:3000/login", 2000);
+      setTimeout(window.location = `${heroUrl}login`, 2000);
     };
     return (
       <div className="container">

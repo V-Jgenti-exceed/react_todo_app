@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { heroUrl } from '../config/index';
 
 class AddItem extends React.Component {
     state = {
@@ -16,7 +17,7 @@ class AddItem extends React.Component {
 
     addByEnter = (e) => {
         if (e.key === 'Enter' && localStorage.getItem('token') === null) {
-            window.location = "http://localhost:3000/";
+            window.location = `${heroUrl}`;
         } else if (e.key === 'Enter') {
             if (!this.state.plan.trim()) {
                 return;
@@ -25,7 +26,7 @@ class AddItem extends React.Component {
             const headers = {
                 Authorization: localStorage.getItem('token'),
             }
-            axios.post('http://localhost:4000/task/create', { plan }, { headers: headers })
+            axios.post(`${heroUrl}task/create`, { plan }, { headers: headers })
                 .then(res => {
                     this.props.createItem(res.data.result);
                     this.setState({ plan: '' });
@@ -38,9 +39,9 @@ class AddItem extends React.Component {
 
     checkAllFunc = () => {
         if (localStorage.getItem('token') === null) {
-            window.location = "http://localhost:3000/";
+            window.location = `${heroUrl}`;
         } else {
-            axios.put('http://localhost:4000/task/checkall', { done: !this.state.done }, { headers: { authorization: localStorage.getItem('token') } })
+            axios.put(`${heroUrl}task/checkall`, { done: !this.state.done }, { headers: { authorization: localStorage.getItem('token') } })
                 .then(res => {
                     this.props.checkAll(res.data.result);
                     this.setState({ done: !this.state.done });

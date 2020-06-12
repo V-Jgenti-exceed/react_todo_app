@@ -2,7 +2,8 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-import {config} from '../'
+import { config } from '../'
+import { heroUrl } from '../config/index';
 
 class SignUp extends React.Component {
   state = {
@@ -27,7 +28,7 @@ class SignUp extends React.Component {
   };
 
   completeReg = () => {
-    axios.post('http://localhost:4000/user/reg', {
+    axios.post(`${heroUrl}user/reg`, {
       userName: this.state.userName,
       password: this.state.password,
       email: this.state.email,
