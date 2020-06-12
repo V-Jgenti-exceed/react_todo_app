@@ -14,9 +14,10 @@ const routing = (
   <Router>
     <div>
       <Switch>
-        <Route path="/login" component={SignIn} />
+        <Route exact path="/login" component={SignIn} />
         <Route path="/register" component={SignUp} />
-        <Route path="/" component={withToken(App), withLoader(App)} />
+        <Route path="/" component={withToken(App)} />
+        <Route path="/" component={withLoader(App)} />
       </Switch>
     </div>
   </Router>

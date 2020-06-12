@@ -16,6 +16,7 @@ export const withLoader = (Component) => {
 
         componentDidMount() {
             const token = Helper.getTokenFromLS();
+
             if (token) {
                 axios.get('http://localhost:4000/task/get', { headers: { authorization: token } })
                     .then(res => {
