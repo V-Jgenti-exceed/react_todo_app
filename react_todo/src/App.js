@@ -16,6 +16,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log("@@@@@@@@@@@@@@conf", conf)
     const token = Helper.getTokenFromLS();
     if (token) {
       axios.get(`${heroUrl}${conf.didMount}`, { headers: { authorization: token } })
@@ -28,7 +29,6 @@ class App extends React.Component {
     }
   };
 
-
   // add plan
   createItem = (item) => {
     const array = [...this.state.arrayItems];
@@ -37,7 +37,7 @@ class App extends React.Component {
 
   //delete plan
   deleteItem = (id) => {
-    axios.delete(`${heroUrl}${conf.didMount}${id}`, { headers: { authorization: this.state.authorization } })
+    axios.delete(`${heroUrl}${conf.didMount}`, { headers: { authorization: this.state.authorization } })
       .then(res => {
         if (res.data.error) {
           alert(res.data.error);
@@ -52,7 +52,7 @@ class App extends React.Component {
 
   //done undone
   updateObject = (id, val, par) => {
-    axios.put(`${heroUrl}${conf.updateObject}${id}`, { [par]: val }, { authorization: this.state.authorization })
+    axios.put(`${heroUrl}${conf.updateObject}`, { [par]: val }, { authorization: this.state.authorization })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       })
@@ -62,7 +62,7 @@ class App extends React.Component {
   };
 
   controlInput = (id, updateTitle) => {
-    axios.put(`${heroUrl}${conf.controlInput}${id}`, { plan: updateTitle }, { authorization: this.state.authorization })
+    axios.put(`${heroUrl}${conf.controlInput}`, { plan: updateTitle }, { authorization: this.state.authorization })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       }).catch(error => {
