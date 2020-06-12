@@ -1,6 +1,6 @@
 import App from '../App';
 
-const heroUrl = 'http://georgiantodo.herokuapp.com';
+const heroUrl = 'https://georgiantodo.herokuapp.com';
 const localHostUrl = 'http://localhost:4000';
 const port = 4000;
 const conf = {
