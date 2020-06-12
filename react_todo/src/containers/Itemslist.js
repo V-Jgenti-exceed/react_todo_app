@@ -11,7 +11,6 @@ class Itemslist extends React.Component {
         this.setState({ filterState: button });
     }
 
-
     render() {
         let count = 0;
         const button = this.state.filterState;
@@ -25,6 +24,7 @@ class Itemslist extends React.Component {
                 updateObject={this.props.updateObject}
                 controleInput={this.props.checkInput}
                 filtredArr={this.props.clearArr}
+                userId={object.user_id}
             />;
             if (button === 'All') {
                 count++;
@@ -39,7 +39,7 @@ class Itemslist extends React.Component {
                 count++;
                 return item;
             }
-
+            
         });
 
         return (

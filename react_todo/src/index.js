@@ -3,12 +3,28 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './custom.scss';
 import App from './App';
+import { SignIn } from './RegAuth/SignIn';
+import { SignUp } from './RegAuth/SignUp';
+import { withToken } from './helpers/withToken';
+import { withLoader } from './helpers/withLoader';
 import * as serviceWorker from './serviceWorker';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 
-ReactDOM.render(
-<App />,
-  document.getElementById('root')
+const routing = (
+  <Router>
+    <div>
+      <Switch>
+        <Route path="/login" component={SignIn} />
+        <Route path="/register" component={SignUp} />
+        <Route path="/" component={withToken(App), withLoader(App)} />
+      </Switch>
+    </div>
+  </Router>
 );
+
+ReactDOM.render((
+  routing
+), document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

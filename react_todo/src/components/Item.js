@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 class Item extends React.Component {
     state = {
@@ -11,7 +10,7 @@ class Item extends React.Component {
 
     deleteFromArr = () => {
         this.props.dell(this.props.id);
-    }
+    };
 
     checkedItem = (e) => {
         this.props.updateObject(this.props.id, e.target.checked, 'done');
@@ -32,11 +31,6 @@ class Item extends React.Component {
         this.props.updateObject(prop, value, 'plan');
     };
 
-    onBlurHandler = () => {
-        axios.
-        this.state.editMode && this.changeState(this.props.id, this.state.value);
-    };
-
     saveByEnter = async (e) => {
         if (e.key === 'Enter') {
             this.props.controleInput(this.props.id, e.target.value);
@@ -44,7 +38,7 @@ class Item extends React.Component {
         }
     };
 
-    someFunc = () => {
+    closeButtons = () => {
         this.setState({ showDeleteButton: !this.state.showDeleteButton });
     };
 
@@ -58,9 +52,8 @@ class Item extends React.Component {
 
         return (
             <li className="list-group-item todo_marking"
-                onMouseEnter={this.someFunc}
-                onMouseLeave={this.someFunc}
-                onBlur={this.onBlurHandler}
+                onMouseEnter={this.closeButtons}
+                onMouseLeave={this.closeButtons}
             >
                 <div className="inline">
                     <div className="round">

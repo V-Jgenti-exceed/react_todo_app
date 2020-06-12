@@ -29,7 +29,7 @@ class Filter extends React.Component {
 
     clearCompleted = (e) => {
         this.changeState(e);
-        axios.delete('https://georgiantodo.herokuapp.com/task/delete', { data: {done:true} })
+        axios.delete('http://localhost:4000/task/delete', { data: {done:true} })
             .then(res => {
                 this.props.clearCompleted(res.data.result);
             })

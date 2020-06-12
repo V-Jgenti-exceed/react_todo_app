@@ -15,36 +15,41 @@ class AddItem extends React.Component {
     }
 
     addByEnter = (e) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && localStorage.getItem('token') === null) {
+            window.location = "http://localhost:3000/";
+        } else if (e.key === 'Enter') {
             if (!this.state.plan.trim()) {
                 return;
             }
             const plan = this.state.plan;
-            axios.post('https://georgiantodo.herokuapp.com/task/create', { plan })
-                .then(response => {
-                    this.props.createItem(response.data.result);
+            const headers = {
+                Authorization: localStorage.getItem('token'),
+            }
+            axios.post('http://localhost:4000/task/create', { plan }, { headers: headers })
+                .then(res => {
+                    this.props.createItem(res.data.result);
                     this.setState({ plan: '' });
                 })
-                .catch(error => {
-                    console.log("error", error);
+                .catch((error) => {
+                    console.log(error);
                 })
-        };
+        }
     };
 
     checkAllFunc = () => {
-        axios.put('https://georgiantodo.herokuapp.com/task/checkall', { done: !this.state.done })
-            .then(res => {
-                console.log('res.data.result', res.data.result);
-                this.props.checkAll(res.data.result);
-                this.setState({ done: !this.state.done });
-            })
-            .catch(error => {
-                console.log(error)
-            });
+        if (localStorage.getItem('token') === null) {
+            window.location = "http://localhost:3000/";
+        } else {
+            axios.put('http://localhost:4000/task/checkall', { done: !this.state.done }, { headers: { authorization: localStorage.getItem('token') } })
+                .then(res => {
+                    this.props.checkAll(res.data.result);
+                    this.setState({ done: !this.state.done });
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
     }
-
-
-
     render() {
         const { plan } = this.state;
         const targetValue = this.props.item > 0 ? 'more_then_one' : 'lower_then_one';
