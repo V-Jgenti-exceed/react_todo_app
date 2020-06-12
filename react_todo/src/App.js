@@ -52,7 +52,7 @@ class App extends React.Component {
 
   //done undone
   updateObject = (id, val, par) => {
-    axios.put(`${heroUrl}${conf.updateObject}`, { [par]: val }, { authorization: this.state.authorization })
+    axios.put(`${heroUrl}${conf.updateObject}${id}`, { [par]: val }, { authorization: this.state.authorization })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       })
@@ -62,7 +62,7 @@ class App extends React.Component {
   };
 
   controlInput = (id, updateTitle) => {
-    axios.put(`${heroUrl}${conf.controlInput}`, { plan: updateTitle }, { authorization: this.state.authorization })
+    axios.put(`${heroUrl}${conf.controlInput}${id}`, { plan: updateTitle }, { authorization: this.state.authorization })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       }).catch(error => {
