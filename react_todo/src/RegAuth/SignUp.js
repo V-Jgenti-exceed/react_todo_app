@@ -2,8 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-import { config } from '../'
-import { heroUrl } from '../config/index';
+import { conf } from '../config/index';
 
 class SignUp extends React.Component {
   state = {
@@ -14,12 +13,12 @@ class SignUp extends React.Component {
 
   usernameFunc = (e) => {
     let userName = e.target.value;
-    this.setState({ userName: userName })
+    this.setState({ userName: userName });
   };
 
   emailFunc = (e) => {
     let email = e.target.value;
-    this.setState({ email: email })
+    this.setState({ email: email });
   };
 
   passwordFunc = (e) => {
@@ -28,7 +27,7 @@ class SignUp extends React.Component {
   };
 
   completeReg = () => {
-    axios.post(`${heroUrl}user/reg`, {
+    axios.post(`${conf.heroUrl}user/reg`, {
       userName: this.state.userName,
       password: this.state.password,
       email: this.state.email,
@@ -68,7 +67,7 @@ class SignUp extends React.Component {
           <Button
             href='/'
           >
-            Already have account? sign in
+            Already have account? sign inI
           </Button>
         </div >
       </div>

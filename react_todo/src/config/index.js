@@ -1,17 +1,5 @@
-import App from '../App';
-
-const heroUrl = 'https://georgiantodo.herokuapp.com';
-const localHostUrl = 'http://localhost:4000';
-const port = 4000;
-const conf = {
-    didMount: '/task/get/',
-    deleteItem: `/task/delete/${""}/`,
-    updateObject: `/task/${""}/update/`,
-    controlInput: `/task/${""}/changeplan/`,
-    addByEnter: `/task/create/`,
-    clearCompleted: '/task/delete/',
-    login: '/auth/login/',
-    reg: '/user/reg/'
+export const conf = {
+    heroUrl: 'https://georgiantodo.herokuapp.com/',
+    localHost: 'http://localhost:3000/',
+    port: 4000,
 };
-
-export { heroUrl, localHostUrl, port, conf };

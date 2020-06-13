@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import * as Helper from '../helpers';
 import { FormControl, InputLabel, Input, FormHelperText } from '@material-ui/core';
-import { heroUrl } from '../config/index';
+import { conf } from '../config/index';
 
 class SignIn extends React.Component {
     state = {
@@ -55,7 +55,7 @@ class SignIn extends React.Component {
                 return;
             }
             this.validationFunc();
-            axios.post(`${heroUrl}auth/login`, {
+            axios.post(`${conf.heroUrl}auth/login`, {
                 email: this.state.email,
                 password: this.state.password,
             })
