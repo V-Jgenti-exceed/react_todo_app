@@ -15,11 +15,6 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-//healt check
-app.get('/health_check', (req, res) => {
-    res.status(200).send('health check is working correctly');
-});
-
 app.listen(port, () => {
     console.log('server is up and working on port' + port);
 });

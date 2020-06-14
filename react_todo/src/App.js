@@ -19,7 +19,7 @@ class App extends React.Component {
 
     const token = Helper.getTokenFromLS();
     if (token) {
-      axios.get(`${conf.heroUrl}task/get/`, { headers: { authorization: token } })
+      axios.get(`${conf.heroUrl}task/get`, { headers: { authorization: token } })
         .then(res => {
           this.setState({ arrayItems: res.data.result, authorization: token, logOut: false })
         })
@@ -52,7 +52,7 @@ class App extends React.Component {
 
   //done undone
   updateObject = (id, val, par) => {
-    axios.put(`${conf.heroUrl}task/${id}/update/`, { [par]: val }, { authorization: this.state.authorization })
+    axios.put(`${conf.heroUrl}task/${id}/update`, { [par]: val }, { authorization: this.state.authorization })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       })
@@ -62,7 +62,7 @@ class App extends React.Component {
   };
 
   controlInput = (id, updateTitle) => {
-    axios.put(`${conf.heroUrl}task/${id}/changeplan/`, { plan: updateTitle }, { authorization: this.state.authorization })
+    axios.put(`${conf.heroUrl}task/${id}/changeplan`, { plan: updateTitle }, { authorization: this.state.authorization })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       }).catch(error => {
@@ -92,7 +92,7 @@ class App extends React.Component {
   // RENDER
   render() {
     if (this.state.logOut) {
-      setTimeout(window.location = `${conf.heroUrl}login`, 2000);
+      window.location = 'https://mytodo1996.herokuapp.com/';
     };
     return (
       <div className="container">
