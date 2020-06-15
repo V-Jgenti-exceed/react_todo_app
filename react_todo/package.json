@@ -25,9 +25,8 @@
     "react-validate-form": "1.0.7"
   },
   "scripts": {
-    "start": "node index.js",
-    "startt": "node server.js",
-    "dev": "react-scripts start",
+    "dev": "node server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
