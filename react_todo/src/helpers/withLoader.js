@@ -12,20 +12,21 @@ export const withLoader = (Component) => {
         }
 
         UNSAFE_componentWillMount() {
-            console.log("@@@@@WILLMOUNT");
             this.setState({ load: true });
         };
 
         componentDidMount() {
             const token = Helper.getTokenFromLS();
             if (token) {
-                axios.get(`${conf.localHost}task/get`, { headers: { authorization: token } })
+                axios.get(`${conf.heroUrl}task/get`, { headers: { authorization: token } })
                     .then(res => {
                         this.setState({ load: false });
                     })
                     .catch(error => {
                         console.log(error);
                     })
+            } else {
+                this.setState({ load: false });
             }
         };
 
