@@ -12,6 +12,7 @@ export const withLoader = (Component) => {
         }
 
         UNSAFE_componentWillMount() {
+            console.log("@@@@@WILLMOUNT");
             this.setState({ load: true });
         };
 
