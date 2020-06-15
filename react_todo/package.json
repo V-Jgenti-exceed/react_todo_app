@@ -25,7 +25,8 @@
     "react-validate-form": "1.0.7"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
+    "heroku-postbuild": "ng build --prod",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
