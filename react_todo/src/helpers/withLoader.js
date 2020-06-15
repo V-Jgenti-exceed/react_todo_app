@@ -2,7 +2,7 @@ import React from 'react';
 import Loaderfiles from '../importFiles/Loaderfiles';
 import axios from 'axios';
 import * as Helper from '../helpers/index';
-import {conf} from '../config/index';
+import { conf } from '../config/index';
 
 export const withLoader = (Component) => {
     return class Loader extends React.Component {
@@ -12,7 +12,6 @@ export const withLoader = (Component) => {
         }
 
         UNSAFE_componentWillMount() {
-            console.log("@@@@@@@@@@@@@@@@@@@willmount")
             this.setState({ load: true });
         };
 
@@ -26,8 +25,6 @@ export const withLoader = (Component) => {
                     .catch(error => {
                         console.log(error);
                     })
-            } else {
-                // this.setState({ load: false });
             }
         };
 

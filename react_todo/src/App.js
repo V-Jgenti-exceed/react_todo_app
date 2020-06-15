@@ -16,7 +16,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-
     const token = Helper.getTokenFromLS();
     if (token) {
       axios.get(`${conf.heroUrl}task/get`, { headers: { authorization: token } })
