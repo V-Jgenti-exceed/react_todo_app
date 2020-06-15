@@ -287,3 +287,8 @@ email_input:invalid {
 .ok {
   display: none;
 }
+
+.logout_butotn {
+  display: flex;
+  justify-content: start;
+}

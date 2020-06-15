@@ -95,6 +95,13 @@ class App extends React.Component {
     };
     return (
       <div className="container">
+        <div className='logout_butotn'>
+          <Button
+            onClick={this.logOut}
+          >
+            Log out :(
+            </Button>
+        </div>
         <div className="row justify-content-center">
           <div className="col-4">
             <h1 className='header_h1'>todos</h1>
@@ -113,11 +120,6 @@ class App extends React.Component {
               filterArray={this.filterArray}
               clearArr={this.clearCompleted}
             />
-            <Button
-              onClick={this.logOut}
-            >
-              Log out :(
-            </Button>
           </div>
         </div>
       </div>
