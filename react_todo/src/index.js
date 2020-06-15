@@ -16,7 +16,7 @@ const routing = (
       <Switch>
         <Route exact path="/login" component={SignIn} />
         <Route path="/register" component={SignUp} />
-        <Route path="/" component={withLoader(withToken(App))} />
+        <Route path="/" component={withToken(withLoader(App))} />
       </Switch>
     </div>
   </Router>
