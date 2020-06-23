@@ -17,7 +17,7 @@ class AddItem extends React.Component {
 
     addByEnter = (e) => {
         if (e.key === 'Enter' && localStorage.getItem('token') === null) {
-            window.location = `${conf.heroUrl}`;
+            window.location = `${conf.localHost}`;
         } else if (e.key === 'Enter') {
             if (!this.state.plan.trim()) {
                 return;
@@ -26,7 +26,7 @@ class AddItem extends React.Component {
             const headers = {
                 Authorization: localStorage.getItem('token'),
             }
-            axios.post(`${conf.heroUrl}task/create`, { plan }, { headers: headers })
+            axios.post(`${conf.localHost}task/create`, { plan }, { headers: headers })
                 .then(res => {
                     this.props.createItem(res.data.result);
                     this.setState({ plan: '' });
@@ -39,9 +39,9 @@ class AddItem extends React.Component {
 
     checkAllFunc = () => {
         if (localStorage.getItem('token') === null) {
-            window.location = `${conf.heroUrl}`;
+            window.location = `${conf.localHost}`;
         } else {
-            axios.put(`${conf.heroUrl}task/checkall`, { done: !this.state.done }, { headers: { authorization: localStorage.getItem('token') } })
+            axios.put(`${conf.localHost}task/checkall`, { done: !this.state.done }, { headers: { authorization: localStorage.getItem('token') } })
                 .then(res => {
                     this.props.checkAll(res.data.result);
                     this.setState({ done: !this.state.done });
@@ -51,6 +51,7 @@ class AddItem extends React.Component {
                 });
         }
     }
+
     render() {
         const { plan } = this.state;
         const targetValue = this.props.item > 0 ? 'more_then_one' : 'lower_then_one';

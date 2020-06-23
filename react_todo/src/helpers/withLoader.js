@@ -1,8 +1,8 @@
 import React from 'react';
 import Loaderfiles from '../importFiles/Loaderfiles';
-import axios from 'axios';
 import * as Helper from '../helpers/index';
 import { conf } from '../config/index';
+import axios from 'axios';
 
 export const withLoader = (Component) => {
     return class Loader extends React.Component {
@@ -18,15 +18,13 @@ export const withLoader = (Component) => {
         componentDidMount() {
             const token = Helper.getTokenFromLS();
             if (token) {
-                axios.get(`${conf.heroUrl}task/get`, { headers: { authorization: token } })
+                axios.get(`${conf.localHost}task/get`, { headers: { authorization: token } })
                     .then(res => {
                         this.setState({ load: false });
                     })
                     .catch(error => {
-                        console.log(error);
+                        console.log(error)
                     })
-            } else {
-                this.setState({ load: false });
             }
         };
 

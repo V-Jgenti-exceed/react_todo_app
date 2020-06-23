@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   text-align: center;
+  background-color: black;
 }
 
 code {
@@ -26,7 +27,7 @@ code {
   font-size: 100px;
   font-weight: 100;
   text-align: center;
-  color: rgba(175, 47, 47, 0.15);
+  color: #ff9054;
 }
 
 .Maininput::placeholder {
@@ -199,6 +200,17 @@ code {
   color: #e6e6e6;
 }
 
+.form-control {
+  border-color: #ffcf40!important;
+  transition: 0.4s!important;
+}
+
+.form-control:focus {
+  outline: none!important;
+  box-shadow: none!important;
+  border-color: #07d5e6!important;
+}
+
 .list-group-item {
   width: 350px;
   position: absolute;
@@ -247,6 +259,17 @@ code {
   background-color: #5B045D;
 }
 
+.background_false {
+  transition: 1s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100%;
+  height: 967px;
+  align-items: center;
+  background-color: white;
+}
+
 .registration_elements {
   display: flex;
   flex-direction: column;
@@ -276,19 +299,86 @@ code {
   width: 500px;
 }
 
+.user_profile .show-button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 320px;
+  height: 45px;
+  border: none;
+  background: #ff531a;
+  border-radius: 0 0px 10px 0;
+  z-index: 123;
+}
+
+.user_profile .profile_main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: fixed;
+  top: 0;
+  left: -50px;
+  width: 320px;
+  height: 50vh;
+  background-color: #0090c7;
+  border-right: 1px solid #ffcf40;
+  border-bottom: 1px solid #ffcf40;
+  transition: 0.3s;
+  opacity: 0;
+}
+
+.profile_main.show {
+  left: 0;
+  opacity: 1;
+}
+
 email_input:invalid {
   border: 1px solid red;
 }
 
-.no {
-  display: inline;
+.profile_main {
+  width: 20%;
+  height: 200px;
+  background-color: red;
 }
 
-.ok {
-  display: none;
+.circle {
+  width: 200px;
+  height: 200px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 25px;
+  border-radius: 100px;
+  background: #FFC300;
 }
 
-.logout_butotn {
+.user_info {
+  height: 300px;
+  width: 300px;
+  margin-top: 100px;
+  border: 1px solid black;
+}
+
+.userName {
+  font-size: 25px;
+  color: #0055FF;
+}
+
+.email {
+  font-size: 18px;
+  color: #0055FF;
+}
+
+.circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 73px;
+  margin-top: 90px;
+  margin-left: 85px;
+}
+
+.info {
   display: flex;
-  justify-content: start;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }

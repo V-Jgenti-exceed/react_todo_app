@@ -2,8 +2,9 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import * as Helper from '../helpers';
-import { FormControl, InputLabel, Input, FormHelperText } from '@material-ui/core';
+import { FormControlLabel, FormGroup, FormControl, InputLabel, Input, FormHelperText } from '@material-ui/core';
 import { conf } from '../config/index';
+import Switch from '@material-ui/core/Switch';
 
 class SignIn extends React.Component {
     state = {
@@ -12,6 +13,7 @@ class SignIn extends React.Component {
         redirect: false,
         emailValidationError: false,
         passwordValidationError: false,
+        isChecked: false,
     };
 
     emailFunc = (e) => {
@@ -47,7 +49,16 @@ class SignIn extends React.Component {
         }
     };
 
+    checkedFunc = (e) => {
+        if (e.target.checked) {
+            this.setState({ isChecked: true })
+        } else {
+            this.setState({ isChecked: false })
+        }
+    }
+
     render() {
+        const changeBackground = this.state.isChecked ? "background_false" : "signIn";
         const loginInFunc = () => {
             const { email, password } = this.state;
             if (!email && !password) {
@@ -55,15 +66,15 @@ class SignIn extends React.Component {
                 return;
             }
             this.validationFunc();
-            axios.post(`${conf.heroUrl}auth/login`, {
+            axios.post(`${conf.localHost}auth/login`, {
                 email: this.state.email,
                 password: this.state.password,
             })
                 .then(res => {
                     Helper.setTokenLS(res.data.token);
-                    this.setState({ redirect: !false });
+                    this.setState({ redirect: true });
                     if (this.state.redirect) {
-                        setTimeout(this.props.history.push('/'), 4000);
+                        this.props.history.push('/');
                     }
                 })
                 .catch(error => {
@@ -76,18 +87,24 @@ class SignIn extends React.Component {
         }
 
         return (
-            <div className='signIn'>
+            <div className={`${changeBackground}`}>
+                <FormGroup>
+                    <FormControlLabel
+                        control={<Switch size="small" checked={this.state.isChecked} onChange={this.checkedFunc} />}
+                        label="Switch Colors"
+                    />
+                </FormGroup>
                 <div className='signIn_element'>
                     <FormControl
                         error={this.state.emailValidationError}>
                         <InputLabel htmlFor="my-input">Email address</InputLabel>
-                        <Input id="my-input" aria-describedby="my-helper-text" onChange={this.emailFunc} />
+                        <Input aria-describedby="my-helper-text" onChange={this.emailFunc} />
                         <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
                     </FormControl>
                     <FormControl
                         error={this.state.passwordValidationError}>
                         <InputLabel htmlFor="my-input">Password</InputLabel>
-                        <Input id="my-input" aria-describedby="my-helper-text" onChange={this.passwordFunc} type='password' />
+                        <Input aria-describedby="my-helper-text" onChange={this.passwordFunc} type='password' />
                         <FormHelperText id="my-helper-text">Enter Password here></FormHelperText>
                     </FormControl>
                     <Button

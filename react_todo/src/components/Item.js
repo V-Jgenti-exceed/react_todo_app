@@ -60,7 +60,7 @@ class Item extends React.Component {
                         <input type="checkbox" id={`${this.props.id}`}
                             onChange={this.checkedItem}
                             className={`round_input ${inputHide}`} />
-                        <label className="round_label" htmlFor={`${this.props.id}`}></label>
+                        <label className='round_label' htmlFor={`${this.props.id}`}></label>
                         <label className={round_label} htmlFor={`${this.props.id}`}></label>
                     </div>
                     <input

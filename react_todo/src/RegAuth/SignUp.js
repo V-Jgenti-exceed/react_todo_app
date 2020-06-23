@@ -3,6 +3,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { conf } from '../config/index';
+import { createHashHistory } from 'history'
+export const history = createHashHistory()
 
 class SignUp extends React.Component {
   state = {
@@ -27,7 +29,7 @@ class SignUp extends React.Component {
   };
 
   completeReg = () => {
-    axios.post(`${conf.heroUrl}user/reg`, {
+    axios.post(`${conf.localHost}user/reg`, {
       userName: this.state.userName,
       password: this.state.password,
       email: this.state.email,
@@ -35,6 +37,10 @@ class SignUp extends React.Component {
   };
 
   render() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.props.history.push('/login')
+    }
     return (
       <div className='registration'>
         <div className='registration_elements'>
