@@ -17,9 +17,6 @@ class Item extends React.Component {
     };
 
     editPlan = () => {
-        if (this.props.check) {
-            return;
-        }
         this.setState({ editMode: true, value: this.props.plan });
     };
 

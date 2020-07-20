@@ -8,7 +8,7 @@ export const withToken = (Component) => {
     return class Valid extends React.Component {
         state = {
             validation: false,
-            authorization: null,
+            // authorization: null,
         }
 
         componentDidMount() {
@@ -22,11 +22,11 @@ export const withToken = (Component) => {
                         if (error.response.status === 403) {
                             alert('Your session is expired please relogin');
                             localStorage.clear()
+                            this.props.history.push('/login')
                         }
                         console.log(error);
                     })
             } else {
-                this.setState({ validation: false });
                 this.props.history.push('/login');
             }
         };

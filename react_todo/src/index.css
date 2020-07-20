@@ -309,6 +309,8 @@ code {
   background: #ff531a;
   border-radius: 0 0px 10px 0;
   z-index: 123;
+  cursor: pointer;
+  text-align: center;
 }
 
 .user_profile .profile_main {
@@ -381,4 +383,13 @@ email_input:invalid {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+}
+
+.my-facebook {
+  height: 25px;
+  font-size: 10px;
+  font-weight: 700;
+  background-color: #4267B2;
+  border: none;
+  color: white;
 }

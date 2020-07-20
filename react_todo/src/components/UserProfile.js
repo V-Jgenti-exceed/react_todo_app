@@ -3,31 +3,25 @@ import axios from 'axios';
 import { conf } from '../config/index';
 import * as Helper from '../helpers/index';
 import { Button } from '@material-ui/core';
+import { gethEmail } from '../actions/profileActions';
+import { gethUsername } from '../actions/profileActions';
+import { connect } from 'react-redux';
 
 class UserProfile extends React.Component {
-    state = {
-        userName: '',
-        email: '',
-        date: null,
-        authorization: null,
-        newPassword: '',
-    }
 
     componentDidMount() {
         const token = Helper.getTokenFromLS();
         if (token) {
             axios.get(`${conf.localHost}user/profile`, { headers: { authorization: token } })
                 .then(res => {
-                    this.setState({ userName: res.data.user.userName, email: res.data.user.email })
+                    this.props.emaiLAction(res.data.user.email);
+                    this.props.gethUsername(res.data.user.userName);
                 })
         }
     }
 
-
-      
-
     render() {
-        const { userName, email } = this.state;
+        const { email, userName } = this.props.profile;
         return (
             <div className={this.props.showHide}>
                 <div className='circle' title='user profile'></div>
@@ -35,11 +29,23 @@ class UserProfile extends React.Component {
                     <p><span>USERNAME: </span>{userName}</p>
                     <p><span>EMAIL: </span>{email}</p>
                     <Button variant="outlined" onClick={this.props.logout}>Log out</Button>
-                </div>   
+                </div>
             </div>
         )
     }
-
 }
 
-export { UserProfile };
+const mapStateToProps = state => {
+    return {
+        profile: state.profileState,
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+    emaiLAction: email => dispatch(gethEmail(email)),
+    gethUsername: userName => dispatch(gethUsername(userName)),
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps)(UserProfile);

@@ -17,6 +17,7 @@ export const withLoader = (Component) => {
 
         componentDidMount() {
             const token = Helper.getTokenFromLS();
+            console.log("@@@@@@@@@@@WOKING")
             if (token) {
                 axios.get(`${conf.localHost}task/get`, { headers: { authorization: token } })
                     .then(res => {

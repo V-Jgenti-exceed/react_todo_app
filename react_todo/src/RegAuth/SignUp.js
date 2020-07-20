@@ -53,7 +53,7 @@ class SignUp extends React.Component {
           />
           <TextField
             id="standard-secondary"
-            label="Enter your @"
+            label="Enter your Email"
             color="secondary"
             onChange={this.emailFunc}
           />
@@ -71,7 +71,7 @@ class SignUp extends React.Component {
             registration
         </Button>
           <Button
-            href='/'
+            href='/login'
           >
             Already have account? sign inI
           </Button>

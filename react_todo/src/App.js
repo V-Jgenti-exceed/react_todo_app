@@ -4,8 +4,9 @@ import { Itemslist } from '../src/containers/Itemslist';
 import { AddItem } from '../src/components/AddItem';
 import * as Helper from './helpers';
 import { conf } from './config/index';
-import { withRouter } from 'react-router';
-import { UserProfile } from './components/UserProfile';
+import UserProfile from './components/UserProfile';
+import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
 
 class App extends React.Component {
   state = {
@@ -14,6 +15,7 @@ class App extends React.Component {
     authorization: null,
     profileState: false,
     logOut: false,
+    downloadContent: {},
   }
 
   componentDidMount() {
@@ -24,7 +26,7 @@ class App extends React.Component {
           this.setState({ arrayItems: res.data.result, authorization: token, logOut: false })
         })
         .catch(error => {
-          console.log(error);
+          console.log('error', error);
         })
     }
   };
@@ -37,7 +39,8 @@ class App extends React.Component {
 
   //delete plan
   deleteItem = (id) => {
-    axios.delete(`${conf.localHost}task/delete/${id}`, { headers: { authorization: this.state.authorization } })
+    const token = Helper.getTokenFromLS();
+    axios.delete(`${conf.localHost}task/delete/${id}`, { headers: { authorization: token } })
       .then(res => {
         if (res.data.error) {
           alert(res.data.error);
@@ -53,7 +56,7 @@ class App extends React.Component {
   //done undone
   updateObject = (id, val, par) => {
     const token = Helper.getTokenFromLS();
-    axios.put(`${conf.localHost}task/${id}/update`, { [par]: val }, { authorization: token })
+    axios.put(`${conf.localHost}task/${id}/update`, { [par]: val }, { headers: { authorization: token } })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       })
@@ -63,7 +66,8 @@ class App extends React.Component {
   };
 
   controlInput = (id, updateTitle) => {
-    axios.put(`${conf.localHost}task/${id}/changeplan`, { plan: updateTitle }, { authorization: this.state.authorization })
+    const token = Helper.getTokenFromLS();
+    axios.put(`${conf.localHost}task/${id}/changeplan`, { plan: updateTitle }, { headers: { authorization: token } })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       }).catch(error => {
@@ -87,6 +91,7 @@ class App extends React.Component {
 
   logOut = () => {
     localStorage.clear();
+    this.props.history.push('/login')
     this.setState({ logOut: true });
   };
 
@@ -104,11 +109,14 @@ class App extends React.Component {
     if (this.state.logOut) {
       window.location.reload()
     };
+
     const userProfile = this.state.profileState ? 'profile_main show' : 'profile_main';
     return (
       <>
         <div className='user_profile'>
-          <button className="show-button" onClick={this.userProfileFunction}>&#128101;</button>
+          <label>
+            <span role='img' aria-label='user' className="show-button" onClick={this.userProfileFunction}>&#128101;</span>
+          </label>
           <UserProfile
             showHide={userProfile}
             logout={this.logOut}
@@ -143,4 +151,10 @@ class App extends React.Component {
   }
 }
 
-export default withRouter(App);
+const mapStateToProps = store => {
+  return {
+    profileState: store.propFileState
+  }
+}
+
+export default connect(mapStateToProps)(withRouter(App));
