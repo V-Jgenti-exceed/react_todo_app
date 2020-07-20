@@ -1,10 +1,12 @@
 import React from 'react';
+// import ReactDOM from 'react-dom';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import * as Helper from '../helpers';
 import { FormControlLabel, FormGroup, FormControl, InputLabel, Input, FormHelperText } from '@material-ui/core';
 import { conf } from '../config/index';
 import Switch from '@material-ui/core/Switch';
+import FacebookLogin from 'react-facebook-login';
 
 class SignIn extends React.Component {
     state = {
@@ -57,6 +59,21 @@ class SignIn extends React.Component {
         }
     }
 
+    responseFacebook = (response) => {
+        axios.post(`http://localhost:4000/user/access`, { facebookUser: response })
+            .then(res => {
+                localStorage.setItem('token', res.data.token);
+                this.setState({ redirect: true });
+                if (this.state.redirect) {
+                    this.props.history.push('/');
+                }
+            })
+            .catch(err => {
+                console.log("error", err);
+            })
+    };
+
+
     render() {
         const changeBackground = this.state.isChecked ? "background_false" : "signIn";
         const loginInFunc = () => {
@@ -83,6 +100,7 @@ class SignIn extends React.Component {
         };
 
         const registerFunc = () => {
+            console.log(this.props.history);
             this.props.history.push('/register');
         }
 
@@ -119,7 +137,16 @@ class SignIn extends React.Component {
                     >
                         Register account
                  </Button>
+                    <FacebookLogin
+                        appId="292910722055075"
+                        size='small'
+                        autoLoad={false}
+                        disableMobileRedirect={true}
+                        fields="name,email,picture"
+                        callback={this.responseFacebook}
+                    />
                 </div>
+
             </div>
         )
     }

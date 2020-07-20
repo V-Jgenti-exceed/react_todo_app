@@ -1,18 +1,18 @@
 import React from 'react';
 import axios from 'axios';
-import {conf} from '../config/index';
+import { conf } from '../config/index';
 
 class Filter extends React.Component {
     state = {
-        All: 'button_active',
-        Active: '',
-        Done: '',
-        Clear: '',
-        someText: '',
+        All: 'All',
+        Active: 'Active',
+        Done: 'Done',
+        Clear: 'Clear',
+        someText: 'someText',
     }
 
     changeState = (e) => {
-        let newState = { ...this.state };
+        let newState = this.state
         for (let property in newState) {
             if (property === e.target.value) {
                 newState[property] = 'button_active';
@@ -30,7 +30,7 @@ class Filter extends React.Component {
 
     clearCompleted = (e) => {
         this.changeState(e);
-        axios.delete(`${conf.heroUrl}task/delete`, { data: { done: true } })
+        axios.delete(`${conf.localHost}task/delete`, { data: { done: true } })
             .then(res => {
                 this.props.clearCompleted(res.data.result);
             })

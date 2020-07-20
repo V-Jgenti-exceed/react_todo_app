@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { conf } from '../config/index';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class AddItem extends React.Component {
     state = {
@@ -15,6 +17,11 @@ class AddItem extends React.Component {
         this.setState({ plan: e.target.value });
     }
 
+    //Notifications 
+    notify = (plan) => {
+        toast(`${plan} Added succesfully`);
+    }
+
     addByEnter = (e) => {
         if (e.key === 'Enter' && localStorage.getItem('token') === null) {
             window.location = `${conf.localHost}`;
@@ -26,6 +33,8 @@ class AddItem extends React.Component {
             const headers = {
                 Authorization: localStorage.getItem('token'),
             }
+            //notification callBack
+            this.notify(plan)
             axios.post(`${conf.localHost}task/create`, { plan }, { headers: headers })
                 .then(res => {
                     this.props.createItem(res.data.result);
@@ -59,6 +68,9 @@ class AddItem extends React.Component {
         return (
             <div className="container">
                 <div className="row justify-content-center">
+                    <ToastContainer
+                        autoClose={2000}
+                    />
                     <button className={`${targetValue} ${changeOnClick}`} onClick={this.checkAllFunc} title='Click for check and uncheck plans'>❱</button>
                     <input
                         className="form-control form-control-lg"

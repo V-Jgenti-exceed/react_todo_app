@@ -39,9 +39,8 @@ class Itemslist extends React.Component {
                 count++;
                 return item;
             }
-            
+            return item
         });
-
         return (
 
             <div className="row justify-content-center">
