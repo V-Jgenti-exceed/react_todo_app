@@ -8,7 +8,6 @@ export const withToken = (Component) => {
     return class Valid extends React.Component {
         state = {
             validation: false,
-            // authorization: null,
         }
 
         componentDidMount() {
