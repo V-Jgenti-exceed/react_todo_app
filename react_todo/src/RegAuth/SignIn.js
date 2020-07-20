@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import * as Helper from '../helpers';
 import { FormControlLabel, FormGroup, FormControl, InputLabel, Input, FormHelperText } from '@material-ui/core';
-import { conf } from '../config/index';
 import Switch from '@material-ui/core/Switch';
 import FacebookLogin from 'react-facebook-login';
 
