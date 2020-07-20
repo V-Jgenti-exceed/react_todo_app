@@ -30,7 +30,7 @@ class Filter extends React.Component {
 
     clearCompleted = (e) => {
         this.changeState(e);
-        axios.delete(`${conf.localHost}task/delete`, { data: { done: true } })
+        axios.delete(`${conf.heroUrl}task/delete`, { data: { done: true } })
             .then(res => {
                 this.props.clearCompleted(res.data.result);
             })

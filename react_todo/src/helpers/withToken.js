@@ -8,13 +8,12 @@ export const withToken = (Component) => {
     return class Valid extends React.Component {
         state = {
             validation: false,
-            // authorization: null,
         }
 
         componentDidMount() {
             const token = Helper.getTokenFromLS();
             if (token) {
-                axios.get(`${conf.localHost}task/get`, { headers: { authorization: token } })
+                axios.get(`${conf.heroUrl}task/get`, { headers: { authorization: token } })
                     .then(res => {
                         this.setState({ validation: true });
                     })
