@@ -29,7 +29,7 @@ class SignUp extends React.Component {
   };
 
   completeReg = () => {
-    axios.post(`${conf.localHost}user/reg`, {
+    axios.post(`${conf.heroUrl}user/reg`, {
       userName: this.state.userName,
       password: this.state.password,
       email: this.state.email,

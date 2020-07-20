@@ -1,5 +1,5 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
+import { conf } from '../config/index';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import * as Helper from '../helpers';
@@ -60,7 +60,7 @@ class SignIn extends React.Component {
     }
 
     responseFacebook = (response) => {
-        axios.post(`http://localhost:4000/user/access`, { facebookUser: response })
+        axios.post(`${conf.heroUrl}user/access`, { facebookUser: response })
             .then(res => {
                 localStorage.setItem('token', res.data.token);
                 this.setState({ redirect: true });
@@ -83,7 +83,7 @@ class SignIn extends React.Component {
                 return;
             }
             this.validationFunc();
-            axios.post(`${conf.localHost}auth/login`, {
+            axios.post(`${conf.heroUrl}auth/login`, {
                 email: this.state.email,
                 password: this.state.password,
             })

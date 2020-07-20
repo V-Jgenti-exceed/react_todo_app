@@ -21,7 +21,7 @@ class App extends React.Component {
   componentDidMount() {
     const token = Helper.getTokenFromLS();
     if (token) {
-      axios.get(`${conf.localHost}task/get`, { headers: { authorization: token } })
+      axios.get(`${conf.heroUrl}task/get`, { headers: { authorization: token } })
         .then(res => {
           this.setState({ arrayItems: res.data.result, authorization: token, logOut: false })
         })
@@ -40,7 +40,7 @@ class App extends React.Component {
   //delete plan
   deleteItem = (id) => {
     const token = Helper.getTokenFromLS();
-    axios.delete(`${conf.localHost}task/delete/${id}`, { headers: { authorization: token } })
+    axios.delete(`${conf.heroUrl}task/delete/${id}`, { headers: { authorization: token } })
       .then(res => {
         if (res.data.error) {
           alert(res.data.error);
@@ -56,7 +56,7 @@ class App extends React.Component {
   //done undone
   updateObject = (id, val, par) => {
     const token = Helper.getTokenFromLS();
-    axios.put(`${conf.localHost}task/${id}/update`, { [par]: val }, { headers: { authorization: token } })
+    axios.put(`${conf.heroUrl}task/${id}/update`, { [par]: val }, { headers: { authorization: token } })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       })
@@ -67,7 +67,7 @@ class App extends React.Component {
 
   controlInput = (id, updateTitle) => {
     const token = Helper.getTokenFromLS();
-    axios.put(`${conf.localHost}task/${id}/changeplan`, { plan: updateTitle }, { headers: { authorization: token } })
+    axios.put(`${conf.heroUrl}task/${id}/changeplan`, { plan: updateTitle }, { headers: { authorization: token } })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       }).catch(error => {
