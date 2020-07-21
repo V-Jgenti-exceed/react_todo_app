@@ -12,7 +12,7 @@ class UserProfile extends React.Component {
     componentDidMount() {
         const token = Helper.getTokenFromLS();
         if (token) {
-            axios.get(`${conf.heroUrl}user/profile`, { headers: { authorization: token } })
+            axios.get(`${conf.localHost}user/profile`, { headers: { authorization: token } })
                 .then(res => {
                     this.props.emaiLAction(res.data.user.email);
                     this.props.gethUsername(res.data.user.userName);
