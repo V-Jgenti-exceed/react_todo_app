@@ -6,6 +6,7 @@ import * as Helper from '../helpers';
 import { FormControlLabel, FormGroup, FormControl, InputLabel, Input, FormHelperText } from '@material-ui/core';
 import Switch from '@material-ui/core/Switch';
 import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 
 class SignIn extends React.Component {
     state = {
@@ -72,6 +73,21 @@ class SignIn extends React.Component {
             })
     };
 
+    googleResponce = (response) => {
+        console.log("@@@@@@@@@@@@@response", response.profileObj);
+        const { googleId, email, name } = response.profileObj;
+        axios.post(`${conf.localHost}user/google`, { googleUser: response.profileObj })
+            .then(res => {
+                localStorage.setItem('token', res.data.token);
+                this.setState({ redirect: true });
+                if (this.state.redirect) {
+                    this.props.history.push('/');
+                }
+            })
+            .catch(error => {
+                console.log('error', error);
+            })
+    }
 
     render() {
         const changeBackground = this.state.isChecked ? "background_false" : "signIn";
@@ -143,6 +159,13 @@ class SignIn extends React.Component {
                         disableMobileRedirect={true}
                         fields="name,email,picture"
                         callback={this.responseFacebook}
+                    />
+                    <GoogleLogin
+                        clientId="615518440215-1fcc9lndkff4eas614c0ski2b1u7fsgq.apps.googleusercontent.com"
+                        buttonText="Login with google"
+                        onSuccess={this.googleResponce}
+                        onFailure={() => { console.log('okokok') }}
+                        cookiePolicy={'single_host_origin'}
                     />
                 </div>
 
