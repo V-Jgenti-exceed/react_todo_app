@@ -28,7 +28,7 @@ class Item extends React.Component {
         this.props.updateObject(prop, value, 'plan');
     };
 
-    saveByEnter = async (e) => {
+    saveByEnter = (e) => {
         if (e.key === 'Enter') {
             this.props.controleInput(this.props.id, e.target.value);
             this.setState({ editMode: false });
