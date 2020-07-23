@@ -162,7 +162,6 @@ class SignIn extends React.Component {
                         clientId="615518440215-1fcc9lndkff4eas614c0ski2b1u7fsgq.apps.googleusercontent.com"
                         buttonText="Login with google"
                         onSuccess={this.googleResponce}
-                        onFailure={() => { console.log('okokok') }}
                         cookiePolicy={'single_host_origin'}
                     />
                 </div>
