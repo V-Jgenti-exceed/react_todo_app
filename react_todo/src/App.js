@@ -21,7 +21,7 @@ class App extends React.Component {
   componentDidMount() {
     const token = Helper.getTokenFromLS();
     if (token) {
-      axios.get(`${conf.localHost}task/get`, { headers: { authorization: token } })
+      axios.get(`${conf.heroUrl}task/get`, { headers: { authorization: token } })
         .then(res => {
           this.setState({ arrayItems: res.data.result, authorization: token, logOut: false })
         })

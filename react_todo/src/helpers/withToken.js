@@ -30,7 +30,7 @@ export const withToken = (Component) => {
         componentDidMount() {
             const token = this.gethTokenFromLocalStorage();
             if (token && !this.isEmpty(token)) {
-                axios.get(`${conf.localHost}task/get`, { headers: { authorization: JSON.stringify(token) } })
+                axios.get(`${conf.heroUrl}task/get`, { headers: { authorization: JSON.stringify(token) } })
                     .then(res => {
                         this.setState({ validation: true });
                     })

@@ -21,7 +21,7 @@ class UserProfile extends React.Component {
         })
 
         if (token) {
-            axios.get(`${conf.localHost}user/profile`, { headers: { authorization: JSON.stringify(token) } })
+            axios.get(`${conf.heroUrl}user/profile`, { headers: { authorization: JSON.stringify(token) } })
                 .then(res => {
                     this.props.emaiLAction(res.data.user.email);
                     this.props.gethUsername(res.data.user.userName);
