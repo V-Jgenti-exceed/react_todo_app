@@ -60,7 +60,7 @@ class SignIn extends React.Component {
     }
 
     responseFacebook = (response) => {
-        axios.post(`${conf.localHost}user/access`, { facebookUser: response })
+        axios.post(`${conf.heroUrl}user/access`, { facebookUser: response })
             .then(res => {
                 localStorage.setItem('facebookToken', res.data.facebookToken);
                 this.setState({ redirect: true });
@@ -74,7 +74,7 @@ class SignIn extends React.Component {
     };
 
     googleResponce = (response) => {
-        axios.post(`${conf.localHost}user/google`, { googleUser: response.profileObj })
+        axios.post(`${conf.heroUrl}user/google`, { googleUser: response.profileObj })
             .then(res => {
                 localStorage.setItem('googleToken', res.data.googleToken);
                 this.setState({ redirect: true });
