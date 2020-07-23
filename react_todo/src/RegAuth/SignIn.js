@@ -96,7 +96,7 @@ class SignIn extends React.Component {
                 return;
             }
             this.validationFunc();
-            axios.post(`${conf.localHost}auth/login`, {
+            axios.post(`${conf.heroUrl}auth/login`, {
                 email: this.state.email,
                 password: this.state.password,
             })
