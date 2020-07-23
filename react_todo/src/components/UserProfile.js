@@ -10,9 +10,18 @@ import { connect } from 'react-redux';
 class UserProfile extends React.Component {
 
     componentDidMount() {
-        const token = Helper.getTokenFromLS();
+        const arr = ['googleToken', 'facebookToken', 'token'];
+        let token = {};
+        arr.forEach(e => {
+            if (e != null && localStorage.getItem(`${e}`)) {
+                token.identifyer = e;
+                token.value = localStorage.getItem(`${e}`);
+
+            }
+        })
+
         if (token) {
-            axios.get(`${conf.localHost}user/profile`, { headers: { authorization: token } })
+            axios.get(`${conf.localHost}user/profile`, { headers: { authorization: JSON.stringify(token) } })
                 .then(res => {
                     this.props.emaiLAction(res.data.user.email);
                     this.props.gethUsername(res.data.user.userName);

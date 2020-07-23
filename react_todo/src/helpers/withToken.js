@@ -10,10 +10,27 @@ export const withToken = (Component) => {
             validation: false,
         }
 
+        gethTokenFromLocalStorage = () => {
+            const arr = ['googleToken', 'facebookToken', 'token'];
+            let token = {};
+            arr.forEach(e => {
+                if (e != null && localStorage.getItem(`${e}`)) {
+                    token.identifyer = e;
+                    token.value = localStorage.getItem(`${e}`);
+
+                }
+            })
+            return token;
+        }
+
+        isEmpty = (obj) => {
+            return Object.keys(obj).length === 0;
+        }
+
         componentDidMount() {
-            const token = Helper.getTokenFromLS();
-            if (token) {
-                axios.get(`${conf.localHost}task/get`, { headers: { authorization: token } })
+            const token = this.gethTokenFromLocalStorage();
+            if (token && !this.isEmpty(token)) {
+                axios.get(`${conf.localHost}task/get`, { headers: { authorization: JSON.stringify(token) } })
                     .then(res => {
                         this.setState({ validation: true });
                     })

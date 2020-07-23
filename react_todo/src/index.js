@@ -21,7 +21,7 @@ ReactDOM.render((
           <Route exact path="/login" component={SignIn} />
           <Route path="/profile" component={UserProfile} />
           <Route path="/register" component={SignUp} />
-          <Route path="/" component={withToken(withLoader(App))} />
+          <Route path="/" component={withToken(App)} />
         </Switch>
       </div>
     </BrowserRouter>

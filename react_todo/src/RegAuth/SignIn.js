@@ -60,9 +60,9 @@ class SignIn extends React.Component {
     }
 
     responseFacebook = (response) => {
-        axios.post(`${conf.heroUrl}user/access`, { facebookUser: response })
+        axios.post(`${conf.localHost}user/access`, { facebookUser: response })
             .then(res => {
-                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('facebookToken', res.data.facebookToken);
                 this.setState({ redirect: true });
                 if (this.state.redirect) {
                     this.props.history.push('/');
@@ -74,11 +74,9 @@ class SignIn extends React.Component {
     };
 
     googleResponce = (response) => {
-        console.log("@@@@@@@@@@@@@response", response.profileObj);
-        const { googleId, email, name } = response.profileObj;
         axios.post(`${conf.localHost}user/google`, { googleUser: response.profileObj })
             .then(res => {
-                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('googleToken', res.data.googleToken);
                 this.setState({ redirect: true });
                 if (this.state.redirect) {
                     this.props.history.push('/');
@@ -98,7 +96,7 @@ class SignIn extends React.Component {
                 return;
             }
             this.validationFunc();
-            axios.post(`${conf.heroUrl}auth/login`, {
+            axios.post(`${conf.localHost}auth/login`, {
                 email: this.state.email,
                 password: this.state.password,
             })
