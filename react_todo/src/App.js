@@ -18,10 +18,12 @@ class App extends React.Component {
     downloadContent: {},
   }
 
+
   componentDidMount() {
-    const token = Helper.getTokenFromLS();
-    if (token) {
-      axios.get(`${conf.heroUrl}task/get`, { headers: { authorization: token } })
+    const token = Helper.gethTokenFromLocalStorage();
+    const isEmpty = Helper.isEmpty(token);
+    if (token && !isEmpty) {
+      axios.get(`${conf.heroUrl}task/get`, { headers: { authorization: JSON.stringify(token) } })
         .then(res => {
           this.setState({ arrayItems: res.data.result, authorization: token, logOut: false })
         })
@@ -39,8 +41,9 @@ class App extends React.Component {
 
   //delete plan
   deleteItem = (id) => {
-    const token = Helper.getTokenFromLS();
-    axios.delete(`${conf.heroUrl}task/delete/${id}`, { headers: { authorization: token } })
+    const token = Helper.gethTokenFromLocalStorage();
+    const isEmpty = Helper.isEmpty(token);
+    axios.delete(`${conf.heroUrl}task/delete/${id}`, { headers: { authorization: JSON.stringify(token) } })
       .then(res => {
         if (res.data.error) {
           alert(res.data.error);
@@ -55,8 +58,9 @@ class App extends React.Component {
 
   //done undone
   updateObject = (id, val, par) => {
-    const token = Helper.getTokenFromLS();
-    axios.put(`${conf.heroUrl}task/${id}/update`, { [par]: val }, { headers: { authorization: token } })
+    const token = Helper.gethTokenFromLocalStorage();
+    const isEmpty = Helper.isEmpty(token);
+    axios.put(`${conf.heroUrl}task/${id}/update`, { [par]: val }, { headers: { authorization: JSON.stringify(token) } })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       })
@@ -66,8 +70,9 @@ class App extends React.Component {
   };
 
   controlInput = (id, updateTitle) => {
-    const token = Helper.getTokenFromLS();
-    axios.put(`${conf.heroUrl}task/${id}/changeplan`, { plan: updateTitle }, { headers: { authorization: token } })
+    const token = Helper.gethTokenFromLocalStorage();
+    const isEmpty = Helper.isEmpty(token);
+    axios.put(`${conf.heroUrl}task/${id}/changeplan`, { plan: updateTitle }, { headers: { authorization: JSON.stringify(token) } })
       .then(res => {
         this.setState({ arrayItems: res.data.result });
       }).catch(error => {

@@ -16,9 +16,10 @@ export const withLoader = (Component) => {
         };
 
         componentDidMount() {
-            const token = Helper.getTokenFromLS();
-            if (token) {
-                axios.get(`${conf.heroUrl}task/get`, { headers: { authorization: token } })
+            const token = Helper.gethTokenFromLocalStorage();
+            const isEmpty = Helper.isEmpty(token);
+            if (token && !isEmpty) {
+                axios.get(`${conf.heroUrl}task/get`, { headers: { authorization: JSON.stringify(token) } })
                     .then(res => {
                         this.setState({ load: false });
                     })

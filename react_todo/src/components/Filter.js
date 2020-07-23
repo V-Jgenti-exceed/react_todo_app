@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import { conf } from '../config/index';
+import * as Helper from '../helpers/index';
 
 class Filter extends React.Component {
     state = {
         All: 'All',
         Active: 'Active',
-        Done: 'Done',
+        done: 'Done',
         Clear: 'Clear',
         someText: 'someText',
     }
@@ -15,7 +16,7 @@ class Filter extends React.Component {
         let newState = this.state
         for (let property in newState) {
             if (property === e.target.value) {
-                newState[property] = 'button_active';
+                newState[property] = 'All';
             } else {
                 newState[property] = '';
             }
@@ -30,9 +31,14 @@ class Filter extends React.Component {
 
     clearCompleted = (e) => {
         this.changeState(e);
-        axios.delete(`${conf.heroUrl}task/delete`, { data: { done: true } })
+        const token = Helper.gethTokenFromLocalStorage();
+        const isEmpty = Helper.isEmpty(token);
+        axios.delete(`${conf.heroUrl}task/delete`, { data: { done: true } }, { headers: { authorization: JSON.stringify(token) } })
             .then(res => {
                 this.props.clearCompleted(res.data.result);
+            })
+            .catch(error => {
+                console.log('err', error);
             })
     }
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { conf } from '../config/index';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import * as Helper from '../helpers/index';
 
 class AddItem extends React.Component {
     state = {
@@ -19,45 +20,45 @@ class AddItem extends React.Component {
 
     //Notifications 
     notify = (plan) => {
-        toast(`${plan} Added succesfully`);
+       return toast(`${plan} Added succesfully`);
     }
 
     addByEnter = (e) => {
         if (e.key === 'Enter' && localStorage.getItem('token') === null) {
-            window.location = `https://mytodo1996.herokuapp.com/`;
+            window.location = `https://frontapptodo.herokuapp.com/`;
         } else if (e.key === 'Enter') {
             if (!this.state.plan.trim()) {
                 return;
             }
             const plan = this.state.plan;
-            const headers = {
-                Authorization: localStorage.getItem('token'),
-            }
-            //notification callBack
-            this.notify(plan)
-            axios.post(`${conf.heroUrl}task/create`, { plan }, { headers: headers })
-                .then(res => {
-                    this.props.createItem(res.data.result);
-                    this.setState({ plan: '' });
-                })
-                .catch((error) => {
-                    console.log(error);
-                })
+            const token = Helper.gethTokenFromLocalStorage();
+            const isEmpty = Helper.isEmpty(token);
+           return this.notify(plan),
+                axios.post(`${conf.heroUrl}task/create`, { plan }, { headers: { authorization: JSON.stringify(token) } })
+                    .then(res => {
+                        this.props.createItem(res.data.result);
+                        this.setState({ plan: '' });
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
         }
     };
 
     checkAllFunc = () => {
         if (localStorage.getItem('token') === null) {
-            window.location = `https://mytodo1996.herokuapp.com/`;
+            window.location = 'https://frontapptodo.herokuapp.com/';
         } else {
-            axios.put(`${conf.heroUrl}task/checkall`, { done: !this.state.done }, { headers: { authorization: localStorage.getItem('token') } })
+            const token = Helper.gethTokenFromLocalStorage();
+            const isEmpty = Helper.isEmpty(token);
+            axios.put(`${conf.heroUrl}task/checkall`, { done: !this.state.done }, { headers: { authorization: JSON.stringify(token) } })
                 .then(res => {
                     this.props.checkAll(res.data.result);
                     this.setState({ done: !this.state.done });
                 })
                 .catch(error => {
                     console.log(error);
-                });
+                })
         }
     }
 
