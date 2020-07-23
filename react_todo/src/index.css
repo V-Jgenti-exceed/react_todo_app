@@ -393,3 +393,12 @@ email_input:invalid {
   border: none;
   color: white;
 }
+
+.socialButton {
+  display: flex;
+  flex-direction: column;
+}
+
+.socialButton button {
+  margin: 10px;
+}

@@ -148,20 +148,22 @@ class SignIn extends React.Component {
                     >
                         Register account
                  </Button>
-                    <FacebookLogin
-                        appId="292910722055075"
-                        size='small'
-                        autoLoad={false}
-                        disableMobileRedirect={true}
-                        fields="name,email,picture"
-                        callback={this.responseFacebook}
-                    />
-                    <GoogleLogin
-                        clientId="615518440215-1fcc9lndkff4eas614c0ski2b1u7fsgq.apps.googleusercontent.com"
-                        buttonText="Login with google"
-                        onSuccess={this.googleResponce}
-                        cookiePolicy={'single_host_origin'}
-                    />
+                    <div className='socialButton'>
+                        <FacebookLogin
+                            appId="292910722055075"
+                            size='small'
+                            autoLoad={false}
+                            disableMobileRedirect={true}
+                            fields="name,email,picture"
+                            callback={this.responseFacebook}
+                        />
+                        <GoogleLogin
+                            clientId="615518440215-1fcc9lndkff4eas614c0ski2b1u7fsgq.apps.googleusercontent.com"
+                            buttonText="Login with google"
+                            onSuccess={this.googleResponce}
+                            cookiePolicy={'single_host_origin'}
+                        />
+                    </div>
                 </div>
 
             </div>
