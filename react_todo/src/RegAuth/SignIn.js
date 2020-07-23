@@ -96,12 +96,11 @@ class SignIn extends React.Component {
                 return;
             }
             this.validationFunc();
-            axios.post(`${conf.heroUrl}auth/login`, {
-                email: this.state.email,
-                password: this.state.password,
-            })
+            axios.post(`${conf.heroUrl}auth/login`, { email: this.state.email, password: this.state.password, })
                 .then(res => {
-                    Helper.setTokenLS(res.data.token);
+                    const token = Helper.gethTokenFromLocalStorage();
+                    const isEmpty = Helper.isEmpty(token);
+                    localStorage.setItem('token', res.data.token);
                     this.setState({ redirect: true });
                     if (this.state.redirect) {
                         this.props.history.push('/');
@@ -113,7 +112,6 @@ class SignIn extends React.Component {
         };
 
         const registerFunc = () => {
-            console.log(this.props.history);
             this.props.history.push('/register');
         }
 
