@@ -42,10 +42,12 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    emaiLAction: email => dispatch(gethEmail(email)),
-    gethUsername: userName => dispatch(gethUsername(userName)),
-})
+const mapDispatchToProps = dispatch => (
+    {
+        emaiLAction: email => dispatch(gethEmail(email)),
+        gethUsername: userName => dispatch(gethUsername(userName))
+    }
+);
 
 export default connect(
     mapStateToProps,

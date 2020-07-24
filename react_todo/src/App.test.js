@@ -1,9 +1,16 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import ReactDOM from 'react-dom';
+import { configure, shallow } from 'enzyme';
+import { expect } from 'chai';
+import Adapter from 'enzyme-adapter-react-16';
+import withToken from './helpers/withToken';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+configure({ adapter: new Adapter() });
+
+describe('withToken component testing', () => {
+  it('renders token in localstorage', () => {
+    const tokenApp = shallow(<withToken />);
+    const welcome = <withToken />
+    expect(tokenApp.contains(welcome)).to.equal(true);
+  });
 });
