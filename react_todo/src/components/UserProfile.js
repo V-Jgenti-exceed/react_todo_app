@@ -17,9 +17,9 @@ class UserProfile extends React.Component {
                 .then(res => {
                     this.props.emaiLAction(res.data.user.email);
                     this.props.gethUsername(res.data.user.userName);
-                })
-        }
-    }
+                });
+        };
+    };
 
     render() {
         const { email, userName } = this.props.profile;
@@ -33,8 +33,8 @@ class UserProfile extends React.Component {
                 </div>
             </div>
         )
-    }
-}
+    };
+};
 
 const mapStateToProps = state => {
     return {

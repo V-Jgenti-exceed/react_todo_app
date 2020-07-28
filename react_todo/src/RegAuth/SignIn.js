@@ -24,7 +24,7 @@ class SignIn extends React.Component {
             this.setState({ emailValidationError: true, email: email });
         } else {
             this.setState({ emailValidationError: false, email: email });
-        }
+        };
     };
 
     passwordFunc = (e) => {
@@ -33,7 +33,7 @@ class SignIn extends React.Component {
             this.setState({ passwordValidationError: true, password: pass });
         } else {
             this.setState({ passwordValidationError: false, password: pass });
-        }
+        };
         this.setState({ password: pass });
     };
 
@@ -48,7 +48,7 @@ class SignIn extends React.Component {
             this.setState({ passwordValidationError: true });
         } else {
             this.setState({ passwordValidationError: false });
-        }
+        };
     };
 
     checkedFunc = (e) => {
@@ -56,8 +56,8 @@ class SignIn extends React.Component {
             this.setState({ isChecked: true })
         } else {
             this.setState({ isChecked: false })
-        }
-    }
+        };
+    };
 
     responseFacebook = (response) => {
         axios.post(`${conf.heroUrl}user/access`, { facebookUser: response })
@@ -66,11 +66,11 @@ class SignIn extends React.Component {
                 this.setState({ redirect: true });
                 if (this.state.redirect) {
                     this.props.history.push('/');
-                }
+                };
             })
             .catch(err => {
                 console.log("error", err);
-            })
+            });
     };
 
     googleResponce = (response) => {
@@ -80,12 +80,12 @@ class SignIn extends React.Component {
                 this.setState({ redirect: true });
                 if (this.state.redirect) {
                     this.props.history.push('/');
-                }
+                };
             })
             .catch(error => {
                 console.log('error', error);
-            })
-    }
+            });
+    };
 
     render() {
         const changeBackground = this.state.isChecked ? "background_false" : "signIn";
